@@ -419,6 +419,7 @@ var Main = {
         submit:function () {
             //60,=15,=0,=30,=10,=10;
             let url='qxyl-2.html?';
+            let daojujiaodubuchang=w1*5;
             url+=('main_angle='+this.$refs.main_angle.value)+'&';
             url+=('tool_minor_cutting_edge_angle='+this.$refs.tool_minor_cutting_edge_angle.value)+'&';
             url+=('edge_inclination_angle='+this.$refs.edge_inclination_angle.value)+'&';
@@ -427,7 +428,7 @@ var Main = {
             url+=('secondary_edge_back_angl='+this.$refs.secondary_edge_back_angl.value)+'&';
             url+=('bangliao_r='+this.$refs.bangdliao_r.value)+'&';
             url+=('bangliao_length='+(this.$refs.bangliao_length.value+127))+'&';
-            url+=('daojujiaodubuchang='+w1*10)+'&';
+            url+=('daojujiaodubuchang='+daojujiaodubuchang)+'&';
             window.location.href=url;
         }
     }

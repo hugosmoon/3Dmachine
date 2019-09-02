@@ -410,8 +410,7 @@ function render() {
         weizuo.position.y=-390-bangliao_length-5;
         weizuodingjian.position.y=-27-bangliao_length;
 
-        tool.position.y=-6.5-bangliao_length+cut_length-bcdl*trig('cot',main_angle);
-        tool.position.x=-bangliao_r1+bcdl;
+        
 
         rot_angle+=frame_time*(machine_speed/30000)*Math.PI;
 
@@ -459,8 +458,11 @@ function render() {
         bangliao2.position.y=-6.5-bangliao_length+cut_length-bangliao2_length/2;
         bangliao3.position.y=-6.5-bangliao_length/2;
 
-        daojia1.position.y=-101-bangliao_length+cut_length-bangliao2_length/2-bcdl*trig('cot',main_angle)+daojujiaodubuchang/2;
-        daojia2.position.y=-163-bangliao_length+cut_length-bangliao2_length/2-bcdl*trig('cot',main_angle)+daojujiaodubuchang/2;
+        tool.position.y=-6.5-bangliao_length+cut_length-bcdl*trig('cot',main_angle);
+        tool.position.x=-bangliao_r1+bcdl;
+
+        daojia1.position.y=-101-bangliao_length+cut_length-bcdl*trig('cot',main_angle)+daojujiaodubuchang;
+        daojia2.position.y=-163-bangliao_length+cut_length-bcdl*trig('cot',main_angle)+daojujiaodubuchang;
         daojia2.position.x=-bangliao_r1+bcdl-100;
 
         if(model_number==9){
