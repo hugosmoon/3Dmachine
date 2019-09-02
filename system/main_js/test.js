@@ -1,5 +1,5 @@
 let renderer, camera, scene;
-
+//victory
 
 let main_angle=60,tool_minor_cutting_edge_angle=15,edge_inclination_angle=0,rake_angle=30,back_angle=10,secondary_edge_back_angl=10;
 let bcdl=0.2,jjl=1;
