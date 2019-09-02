@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="icon" href="../../logo.ico">
+    <title>车刀角度</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../import/css/index.css">
+    <!-- 引入组件库 -->
+    <script src="../../import/vue.js"></script>
+    <script src="../../import/element_index.js"></script>
+    <script src="../../import/three.js"></script>
+    <script src="../../import/stats.js"></script>
+    <script src="../../import/Setting.js"></script>
+    <script src="../../import/OrbitControls.js"></script>
+    <script src="../../import/dat.gui.min.js"></script>
+    <script src="../../import/SceneUtils.js"></script>
+    <script src="../../import/jquery-3.4.1.min.js"></script>
+    <style type="text/css">
+        body {
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            height: 1000px;
+            /*全屏显示的设置*/
+            margin: 0;
+            overflow: hidden;/*消除浏览器的滚动条*/
+        }
+        #render{
+            position:absolute;
+            margin-top: 0px;
+        }
+        #control{
+            opacity: 0.9;
+            border-radius:10px;
+            background:rgba(0,0,0,0.7);
+            position:absolute;
+            margin-top: 30px;
+            margin-left: 30px;
+            padding-bottom: 30px;
+
+            width: 400px;
+
+        }
+        #control-inner{
+            margin-top: 30px;
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+        #title1{
+            font-size: 22px;
+            color: floralwhite;
+        }
+        .con-ang{
+            margin-bottom: 50px;
+        }
+
+    </style>
+</head>
+<body onload="threeStart()">
+
+<div>
+<!--加载动画的div-->
+<div id="render" >
+</div>
+<div id="control" >
+    <div id="control-inner">
+        <p id="title1">车刀基本标注角度</p>
+
+        <!--<button id="control-8">刀尖向前</button>-->
+
+        <div id="app">
+            <template>
+                <div class="block con-ang">
+                    <span class="demonstration" style="color:#C0C4CC">主偏角</span>
+                    <el-slider ref="main_angle" v-model="value1" :marks="marks_main_angle" :min=30 :max=90 @change="greet" ></el-slider>
+                </div>
+                <div class="block con-ang">
+                    <span class="demonstration" style="color:#C0C4CC">副偏角</span>
+                    <el-slider v-model="value2" :marks="marks_tool_minor_cutting_edge_angle" :min=-15 :max=20 @change="greet"></el-slider>
+                </div>
+                <div class="block con-ang">
+                    <span class="demonstration" style="color:#C0C4CC">刃倾角</span>
+                    <el-slider v-model="value3" :marks="marks_edge_inclination_angle" :min=-15 :max=5></el-slider>
+                </div>
+                <div class="block con-ang">
+                    <span class="demonstration" style="color:#C0C4CC">前角</span>
+                    <el-slider v-model="value4" :marks="marks_rake_angle" :min=-15 :max=25></el-slider>
+                </div>
+                <div class="block con-ang">
+                    <span class="demonstration" style="color:#C0C4CC">后角</span>
+                    <el-slider v-model="value5" :marks="marks_back_angle" :min=-15 :max=20></el-slider>
+                </div>
+                <div class="block con-ang">
+                    <span class="demonstration" style="color:#C0C4CC">副刃后角</span>
+                    <el-slider v-model="value6" :marks="marks_secondary_edge_back_angle" :min=-15 :max=20></el-slider>
+                </div>
+                <!--<div class="block con-ang">-->
+                    <!--<span class="demonstration" style="color:#C0C4CC">刀尖圆弧半径</span>-->
+                    <!--<el-slider v-model="value7" :marks="marks_tip_radius" :step="0.01" :min=0.25 :max=2></el-slider>-->
+                <!--</div>-->
+            </template>
+            <!--<el-button id="alert1" type="primary" v-on:click="greet">主要按钮</el-button>-->
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+    let renderer, camera, scene;
+    let controller;
+    let vertices;
+    let faces;
+    let controlPoints = [];
+    let geom;
+    let mesh,box;
+
+    //初始化渲染器
+    function initThree() {
+        renderer = new THREE.WebGLRenderer({
+            antialias: true
+        });//定义渲染器
+        renderer.setSize(window.innerWidth, window.innerHeight);//设置渲染的宽度和高度
+        document.getElementById('render').appendChild(renderer.domElement);//将渲染器加在html中的div里面
+
+        renderer.setClearColor(0x444444, 1.0);//渲染的颜色设置
+        renderer.shadowMapEnabled = true;//开启阴影，默认是关闭的，太影响性能
+        renderer.shadowMapType = THREE.PCFSoftShadowMap;//阴影的一个类型
+
+
+        camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000);//perspective是透视摄像机，这种摄像机看上去画面有3D效果
+
+        //摄像机的位置
+        camera.position.x = 15;
+        camera.position.y = 7;
+        camera.position.z = 10;
+        camera.up.x = 0;
+        camera.up.y = 0;
+        camera.up.z = 1;//摄像机的上方向是Z轴
+        camera.lookAt(0, 0, 0);//摄像机对焦的位置
+        //这三个参数共同作用才能决定画面
+
+        scene = new THREE.Scene();
+
+        let light = new THREE.SpotLight(0xffffff, 1.2, 0);//点光源
+        light.position.set(40, 20,80);
+        light.castShadow = true;//开启阴影
+        light.shadowMapWidth = 8192;//阴影的分辨率，可以不设置对比看效果
+        light.shadowMapHeight = 8192;
+        scene.add(light);
+
+        let light3 = new THREE.AmbientLight(0xaaaaaa, 0.6);//环境光，如果不加，点光源照不到的地方就完全是黑色的
+        scene.add(light3);
+
+        cameraControl();
+
+    }
+
+    //顶点控制初始化
+    function vectorConcrol() {
+        function addControl(x, y, z) {
+            let controls;
+            controls = new function () {
+                this.x = x;
+                this.y = y;
+                this.z = z;
+            };
+            return controls;
+        }
+        controlPoints.push(addControl(1.5, 3, 0.8));
+        controlPoints.push(addControl(1, 3, -1));
+        controlPoints.push(addControl(2.5, -1, 1.2));
+        controlPoints.push(addControl(2, -1, -1));
+        controlPoints.push(addControl(-1, 3, -1));
+        controlPoints.push(addControl(-1, 3, 0.8));
+        controlPoints.push(addControl(-1, -1, -1));
+        controlPoints.push(addControl(-1, -1, 1.2));
+        controlPoints.push(addControl(3.5, 1, 1));
+        controlPoints.push(addControl(3, 1, -1));
+
+    }
+
+   // 摄像机的控制，可以采用鼠标拖动来控制视野
+    function cameraControl() {
+        controller = new THREE.OrbitControls(camera, renderer.domElement);
+        controller.target = new THREE.Vector3(0, 0, 0);
+    }
+
+    let plane;
+
+    //初始化物体
+    function initObject() {
+        //定义了一个地面
+        let planeGeometry = new THREE.PlaneGeometry(100, 100, 20, 20);
+        let planeMaterial =
+            new THREE.MeshLambertMaterial({color: 0x888888})
+            // new THREE.MeshBasicMaterial({color: 0x000000, wireframe: true})//线条材质，让观察更直观一点
+        plane = new THREE.Mesh(planeGeometry, planeMaterial);
+        // plane.rotation.y = -0.5 * Math.PI;
+        plane.position.z = -5;
+        plane.receiveShadow = true;//开启地面的接收阴影
+        scene.add(plane);//添加到场景中
+        // initCustomObj();
+
+        let boxgeom=new THREE.BoxGeometry(4,4,4)
+        let materials = [
+            new THREE.MeshPhongMaterial({opacity: 0.6, color: 0x545454, transparent: false,specular:0x545454,metal:true}),
+            // new THREE.MeshLambertMaterial({opacity: 0.6, color: 0x777777, transparent: true}),//透明度更改
+            // new THREE.MeshBasicMaterial({color: 0x000000, wireframe: true})//线条材质，让观察更直观一点
+        ];
+        box = THREE.SceneUtils.createMultiMaterialObject(boxgeom, materials);
+        box.position.x=-2;
+        box.position.y=-2;
+        box.position.z=-2;
+        // box.rotation.x=30*(Math.PI/180);
+        // box.rotation.y=30*(Math.PI/180);
+        box.receiveShadow = true;
+        box.children.forEach(function (e) {
+            e.castShadow = true
+        });
+        scene.add(box);
+
+        let boxgeom2=new THREE.BoxGeometry(6,6,4);
+        box = THREE.SceneUtils.createMultiMaterialObject(boxgeom2, materials);
+        // box.position.x=2;
+        // box.position.y=2;
+        // box.position.z=2.31;
+        box.rotation.x=30*(Math.PI/180);
+        box.rotation.y=0.1*(Math.PI/180);
+        box.receiveShadow = true;
+        box.children.forEach(function (e) {
+            e.castShadow = true
+        });
+        scene.add(box);
+
+
+        //顶点坐标，一共10个顶点
+        vertices = [
+            new THREE.Vector3(1.5, 3, 0.8),
+            new THREE.Vector3(1, 3, -1),
+            new THREE.Vector3(2.5, -1, 1.2),
+            new THREE.Vector3(2, -1, -1),
+            new THREE.Vector3(-1, 3, -1),
+            new THREE.Vector3(-1, 3, 0.8),
+            new THREE.Vector3(-1, -1, -1),
+            new THREE.Vector3(-1, -1, 1.2),
+            new THREE.Vector3(3.5, 1, 1),
+            new THREE.Vector3(3, 1, -1)
+
+
+        ];
+
+        //顶点索引，每一个面都会根据顶点索引的顺序去绘制线条
+        faces = [
+            new THREE.Face3(0, 8, 1),
+            new THREE.Face3(1, 8, 9),
+            new THREE.Face3(8, 2, 3),
+            new THREE.Face3(8, 3, 9),
+
+            new THREE.Face3(4, 6, 5),
+            new THREE.Face3(6, 7, 5),
+            new THREE.Face3(4, 5, 1),
+            new THREE.Face3(5, 0, 1),
+            new THREE.Face3(7, 6, 2),
+            new THREE.Face3(6, 3, 2),
+
+            new THREE.Face3(5, 7, 8),
+            new THREE.Face3(8, 7, 2),
+            new THREE.Face3(0, 5, 8),
+
+            new THREE.Face3(4, 1, 9),
+            new THREE.Face3(9, 6, 4),
+            new THREE.Face3(6, 9, 3)
+        ];
+
+        geom = new THREE.Geometry();
+        geom.vertices = vertices;
+        geom.faces = faces;
+        geom.computeFaceNormals();//计算法向量，会对光照产生影响
+
+        //两个材质放在一起使用
+
+        //创建多材质对象，要引入SceneUtils.js文件，如果只有一个材质就不需要这个函数
+        mesh = THREE.SceneUtils.createMultiMaterialObject(geom, materials);
+        mesh.children.forEach(function (e) {
+            e.castShadow = true
+        });
+        mesh.receiveShadow = true;
+        // scene.add(mesh);
+
+    }
+
+    //定义的一个功能文件
+    function initSetting() {
+        loadAutoScreen(camera, renderer);
+        // loadFullScreen();
+        // loadStats();
+    }
+
+    //动画
+    function render() {
+
+        let vertices = [];
+        for (let i = 0; i < 10; i++) {
+            vertices.push(new THREE.Vector3(controlPoints[i].x, controlPoints[i].y, controlPoints[i].z));
+        }
+        mesh.children.forEach(function (e) {
+            e.geometry.vertices = vertices;
+            e.geometry.verticesNeedUpdate = true;//通知顶点更新
+            e.geometry.elementsNeedUpdate = true;//特别重要，通知线条连接方式更新
+            e.geometry.computeFaceNormals();
+        });
+
+        // box.rotation.x+=0.01;
+
+        requestAnimationFrame(render);
+        renderer.render(scene, camera);
+    }
+
+
+    //主函数
+    function threeStart() {
+        initThree();
+        vectorConcrol();
+        initObject();
+        initSetting();
+        render();
+    }
+</script>
+<script>
+    let value1;
+    var Main = {
+        data() {
+                return {
+                    value1:60,
+                    value2:0,
+                    value3:10,
+                    value4:15,
+                    value5:10,
+                    value6:15,
+                    value7:1,
+                    marks_main_angle: {
+                        '30':'30°',
+                        45: '45°',
+                        60: '60°',
+                        75: '75°',
+                        90: '90°'
+                    },
+                    marks_tool_minor_cutting_edge_angle: {
+                            '-15':'-15°',
+                            '-10':'-10°',
+                            '-5':'-5°',
+                            '0': '0°',
+                            5: '5°',
+                            10: '10°',
+                            15: '15°',
+                            20: '20°'
+                    },
+                    marks_edge_inclination_angle: {
+                        '-15':'-15°',
+                        '-10':'-10°',
+                        '-5':'-5°',
+                        '0': '0°',
+                        5: '5°',
+                        10: '10°',
+                        15: '15°',
+                        20: '20°',
+                        25: '25°'
+                    },
+                    marks_rake_angle: {
+                        '-15':'-15°',
+                        '-10':'-10°',
+                        '-5':'-5°',
+                        '0': '0°',
+                        5: '5°',
+                        10: '10°',
+                        15: '15°',
+                        20: '20°',
+                        25: '25°'
+                    },
+                    marks_back_angle: {
+                        '-15':'-15°',
+                        '-10':'-10°',
+                        '-5':'-5°',
+                        '0': '0°',
+                        5: '5°',
+                        10: '10°',
+                        15: '15°',
+                        20: '20°'
+                    },
+                    marks_secondary_edge_back_angle: {
+
+                        '-15':'-15°',
+                        '-10':'-10°',
+                        '-5':'-5°',
+                        '0': '0°',
+                        5: '5°',
+                        10: '10°',
+                        15: '15°',
+                        20: '20°'
+                    },
+                    marks_tip_radius: {
+
+                        0.25: '0.25mm',
+                        0.7: '0.7mm',
+                        1: '1.0mm',
+                        1.5: '1.5mm',
+                        2: '2.0mm'
+                    }
+                }
+            },
+        methods: {
+            greet: function (xx) {
+                // `this` 在方法里指向当前 Vue 实例
+                // alert('Hello ' + this.value1 + '!')
+                // alert(this.$refs.main_angle.value)
+                alert(xx);
+                // controlPoints[8].x+=1;
+            }
+        }
+        }
+
+    var Ctor = Vue.extend(Main)
+    new Ctor().$mount('#app')
+</script>
+</body>
+</html>

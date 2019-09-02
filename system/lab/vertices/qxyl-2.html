@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="icon" href="../../logo.ico">
+    <title>虚拟切削</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../../import/css/index.css">
+    <link rel="stylesheet" href="../../main_css/main.css">
+    <!-- 引入组件库 -->
+    <script src="../../../import/vue.js"></script>
+    <script src="../../../import/element_index.js"></script>
+    <script src="../../../import/three.js"></script>
+    <script src="../../../import/stats.js"></script>
+    <script src="../../../import/Setting.js"></script>
+    <script src="../../../import/OrbitControls.js"></script>
+    <script src="../../../import/dat.gui.min.js"></script>
+    <script src="../../../import/SceneUtils.js"></script>
+    <script src="../../../import/jquery-3.4.1.min.js"></script>
+    <script src="../../../import/STLLoader.js"></script>
+    <script src="../../../import/dat.gui.js"></script>
+</head>
+<body onload="threeStart()">
+
+<el-row :gutter="20" v-loading='loading'>
+    <!-- ... -->
+</el-row>
+
+<div>
+<!--加载动画的div-->
+<div id="render" >
+</div>
+
+
+        <!--<button id="control-8">刀尖向前</button>-->
+
+        <div id="app">
+            <div id="control" >
+                <div id="control-inner">
+                    <p id="title1">车床参数</p>
+            <template>
+                <div class="block con-ang">
+                    <span class="demonstration" style="color:#C0C4CC">主轴转速(r/min)</span>
+                    <el-slider ref="machine_speed" v-model="value1" :marks="marks_machine_speed" :min=0 :max=1600 :step="20"   :disabled="adjustable"></el-slider>
+                </div>
+                <div class="block con-ang">
+                    <span class="demonstration" style="color:#C0C4CC">背吃刀量(mm)</span>
+                    <el-slider ref="cutting_depth" v-model="value2" :marks="marks_cutting_depth" :min=1 :max=6 :step="0.1" @input="greet" @change="greet" :disabled="adjustable"></el-slider>
+                </div>
+                <div class="block con-ang">
+                    <span class="demonstration" style="color:#C0C4CC">进给量(mm/r)</span>
+                    <el-slider ref="feed" v-model="value3" :marks="marks_feed" :min=0.1 :max=0.5 :step="0.01" @input="greet" @change="greet" :disabled="adjustable"></el-slider>
+                </div>
+
+            </template>
+
+                    <el-row>
+                        <el-button type="warning" plain @click="reload">复位实验</el-button>
+                    </el-row>
+                    <br>
+                    <el-row>
+                        <el-button type="primary" @click="start">启动机床</el-button>
+
+                        <el-button type="danger" @click="end">关闭机床</el-button>
+
+                    </el-row>
+
+        </div>
+        </div>
+            <div id="force_control">
+                <div id="control-inner">
+                <div class="demo-image__placeholder">
+                    <div class="block">
+                        <span class="demonstration" style="color:#C0C4CC">主切削力</span>
+                        <!--<el-image :src="src1"></el-image>-->
+                        <canvas style="margin-top:20px;height: 200px;width: 340px;background: rgba(255, 255, 255, 0);"></canvas>
+                    </div>
+                    <div class="block">
+                        <span class="demonstration" style="color:#C0C4CC">径向切削力</span>
+                        <canvas style="margin-top:20px;height: 200px;width: 340px;background: rgba(255, 255, 255, 0);"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+</div>
+<script src="../../main_js/tool.js"></script>
+<script src="../../main_js/qxyl-2.js"></script>
+
+</body>
+</html>

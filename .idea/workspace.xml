@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a71f4657-b63f-4e0a-9cc1-de8010ff5b85" name="Default Changelist" comment="" />
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/lab/vertices/qxyl-1.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="52" lean-forward="true" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/main_js/qxyl-1.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2917">
+              <caret line="392" selection-start-line="392" selection-end-line="392" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/lab/vertices/qxyl-2.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-87">
+              <caret line="32" column="6" lean-forward="true" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/main_js/qxyl-2.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="447">
+              <caret line="200" selection-start-line="200" selection-end-line="200" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/lab/vertices/test1.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/system/main_js/test.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="422">
+              <caret line="196" column="33" selection-start-line="196" selection-start-column="33" selection-end-line="196" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>vectorConcrol</find>
+      <find>controlPoints</find>
+      <find>main_angle</find>
+      <find>faces</find>
+      <find>child</find>
+      <find>daojia</find>
+      <find>bangliao2_length</find>
+      <find>12</find>
+      <find>bangliao_r2</find>
+      <find>materials_szjp_pan</find>
+      <find>daojia1</find>
+      <find>machine_speed</find>
+      <find>daojia2.position.z</find>
+      <find>szjp_distance</find>
+      <find>bangliao_r1</find>
+      <find>szjp_pan</find>
+      <find>szjp_pan.rotation.z</find>
+      <find>jichuang.position.y</find>
+      <find>weizuo.position.x</find>
+      <find>sigang</find>
+      <find>daojia2</find>
+      <find>默认</find>
+      <find>l</find>
+      <find>load_status</find>
+      <find>asyncCall</find>
+      <find>setTimeout</find>
+      <find>load_model</find>
+      <find>reload_mesh</find>
+      <find>computeBoundingBox</find>
+      <find>jichuang.position.</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>'e',</replace>
+      <replace>'a',</replace>
+      <replace>'f',</replace>
+      <replace>'h'</replace>
+      <replace>(w-w1)</replace>
+      <replace>szjp_zhua1</replace>
+      <replace>daojia1</replace>
+      <replace>daojia2</replace>
+      <replace>sigang</replace>
+    </replaceStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/import/Setting.js" />
+        <option value="$PROJECT_DIR$/demo/vertices/1.js" />
+        <option value="$PROJECT_DIR$/demo/vertices/vertices的副本.html" />
+        <option value="$PROJECT_DIR$/import/css/index.css" />
+        <option value="$PROJECT_DIR$/import/element_index.js" />
+        <option value="$PROJECT_DIR$/demo/vertices/vertices2.html" />
+        <option value="$PROJECT_DIR$/main_css/tool_angle.css" />
+        <option value="$PROJECT_DIR$/demo/vertices/test1.html" />
+        <option value="$PROJECT_DIR$/main_js/test.js" />
+        <option value="$PROJECT_DIR$/main_js/tool_angle.js" />
+        <option value="$PROJECT_DIR$/demo/vertices/vertices.html" />
+        <option value="$PROJECT_DIR$/main_css/main.css" />
+        <option value="$PROJECT_DIR$/main_js/model_stl.js" />
+        <option value="$PROJECT_DIR$/demo/vertices/modelstl.html" />
+        <option value="$PROJECT_DIR$/demo/vertices/qxyl-2.html" />
+        <option value="$PROJECT_DIR$/main_js/tool.js" />
+        <option value="$PROJECT_DIR$/main_js/qxyl-2.js" />
+        <option value="$PROJECT_DIR$/demo/vertices/qxyl-1.html" />
+        <option value="$PROJECT_DIR$/main_js/qxyl-1.js" />
+        <option value="$PROJECT_DIR$/system/main_js/qxyl-1.js" />
+        <option value="$PROJECT_DIR$/system/lab/vertices/qxyl-1.html" />
+        <option value="$PROJECT_DIR$/system/lab/vertices/qxyl-2.html" />
+        <option value="$PROJECT_DIR$/system/lab/vertices/test1.html" />
+        <option value="$PROJECT_DIR$/system/main_js/qxyl-2.js" />
+        <option value="$PROJECT_DIR$/system/main_js/test.js" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1680" />
+    <option name="height" value="1050" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="virtual-machining" type="b2602c69:ProjectViewProjectNode" />
+              <item name="virtual-machining" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="virtual-machining" type="b2602c69:ProjectViewProjectNode" />
+              <item name="virtual-machining" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="virtual-machining" type="b2602c69:ProjectViewProjectNode" />
+              <item name="virtual-machining" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+              <item name="lab" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="virtual-machining" type="b2602c69:ProjectViewProjectNode" />
+              <item name="virtual-machining" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+              <item name="lab" type="462c0819:PsiDirectoryNode" />
+              <item name="vertices" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="virtual-machining" type="b2602c69:ProjectViewProjectNode" />
+              <item name="virtual-machining" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+              <item name="main_css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="virtual-machining" type="b2602c69:ProjectViewProjectNode" />
+              <item name="virtual-machining" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+              <item name="main_js" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/main_js" />
+      <recent name="$PROJECT_DIR$/demo/vertices" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="JavaScript Debug.test1.html">
+    <configuration name="qxyl-1.html (1)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/virtual-machining/system/lab/vertices/qxyl-1.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="qxyl-1.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/nsytsqdtn.github.io-master/demo/vertices/qxyl-1.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="qxyl-2.html (1)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/virtual-machining/system/lab/vertices/qxyl-2.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="qxyl-2.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/nsytsqdtn.github.io-master/demo/vertices/qxyl-2.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="test1.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/virtual-machining/system/lab/vertices/test1.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.test1.html" />
+        <item itemvalue="JavaScript Debug.qxyl-2.html (1)" />
+        <item itemvalue="JavaScript Debug.qxyl-1.html (1)" />
+        <item itemvalue="JavaScript Debug.qxyl-2.html" />
+        <item itemvalue="JavaScript Debug.qxyl-1.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a71f4657-b63f-4e0a-9cc1-de8010ff5b85" name="Default Changelist" comment="" />
+      <created>1565967613931</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1565967613931</updated>
+      <workItem from="1565967616240" duration="59480000" />
+      <workItem from="1566282292854" duration="20210000" />
+      <workItem from="1566462304571" duration="50348000" />
+      <workItem from="1567061296277" duration="42320000" />
+      <workItem from="1567223767420" duration="35409000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="207767000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14526823" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4996986" weight="0.32959184" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4996986" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50030136" side_tool="true" visible="true" weight="0.030612245" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/import/OrbitControls.js</url>
+          <line>15</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/demo/vertices/1.js" />
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="17174" column="12" selection-start-line="17174" selection-start-column="12" selection-end-line="17174" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../index.css" />
+    <entry file="file://$PROJECT_DIR$/import/css/index.css" />
+    <entry file="file://$PROJECT_DIR$/demo/vertices/vertices2.html" />
+    <entry file="file://$PROJECT_DIR$/demo/vertices/test1.html" />
+    <entry file="file://$PROJECT_DIR$/main_js/test.js" />
+    <entry file="file://$PROJECT_DIR$/demo/vertices/vertices的副本.html" />
+    <entry file="file://$PROJECT_DIR$/demo/vertices/tooldisplay.html" />
+    <entry file="file://$PROJECT_DIR$/import/element_index.js" />
+    <entry file="file://$PROJECT_DIR$/main_js/tool_angle.js" />
+    <entry file="file://$PROJECT_DIR$/main_css/main.css" />
+    <entry file="file://$PROJECT_DIR$/main_js/tool.js" />
+    <entry file="file://$PROJECT_DIR$/demo/vertices/qxyl-1.html" />
+    <entry file="file://$PROJECT_DIR$/main_js/qxyl-1.js" />
+    <entry file="file://$PROJECT_DIR$/import/Setting.js" />
+    <entry file="file://$PROJECT_DIR$/demo/vertices/qxyl-2.html" />
+    <entry file="file://$PROJECT_DIR$/main_js/qxyl-2.js" />
+    <entry file="file://$PROJECT_DIR$/model/6140.STL">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="29" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/main_js/qxyl-1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2917">
+          <caret line="392" selection-start-line="392" selection-end-line="392" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/import/STLLoader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3747">
+          <caret line="38" column="29" lean-forward="true" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/import/OrbitControls.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/import/three.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="9714" column="42" selection-start-line="9714" selection-start-column="29" selection-end-line="9714" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/lab/vertices/qxyl-1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="52" lean-forward="true" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/lab/vertices/test1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/lab/vertices/qxyl-2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-87">
+          <caret line="32" column="6" lean-forward="true" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/main_js/qxyl-2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="200" selection-start-line="200" selection-end-line="200" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/main_js/test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="196" column="33" selection-start-line="196" selection-start-column="33" selection-end-line="196" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
