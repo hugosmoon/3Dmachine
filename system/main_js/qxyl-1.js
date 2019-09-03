@@ -263,6 +263,20 @@ var Main = {
 
             bangliao_r: 80,
             bangdliao_length:600,
+            bangliao_materials: [{
+                value: '0',
+                label: '45钢'
+              }, {
+                value: '1',
+                label: '不锈钢'
+              }, {
+                value: '2',
+                label: '灰铸铁'
+              }, {
+                value: '3',
+                label: '黄铜'
+              }],
+              value: '',
 
             marks_main_angle: {
                 10:'10°',
