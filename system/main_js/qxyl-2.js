@@ -150,6 +150,17 @@ function initObject() {
     ];
 
     //棒料的材质
+    materials_bangliao_3 = [
+        new THREE.MeshPhongMaterial({
+            opacity: 0.6,
+            color: 0x434343,
+            transparent: false,
+            specular: 0x434343,
+            metal: true
+        }),
+    ];
+
+    //棒料3的材质
     materials_bangliao = [
         new THREE.MeshPhongMaterial({
             opacity: 0.6,
@@ -238,7 +249,7 @@ function initObject() {
         // bangliao2.visible=false;
 
         bangliao3_Geometry=new THREE.CylinderGeometry(bangliao_r2, bangliao_r2, bangliao_length,72,100);
-        bangliao3 = THREE.SceneUtils.createMultiMaterialObject(bangliao3_Geometry, materials_bangliao);
+        bangliao3 = THREE.SceneUtils.createMultiMaterialObject(bangliao3_Geometry, materials_bangliao_3);
 
 
 
@@ -450,7 +461,7 @@ function render() {
 
             deleteGroup(bangliao3);
             bangliao3_Geometry=new THREE.CylinderGeometry(bangliao_r2, bangliao_r2, bangliao_length,360,100);
-            bangliao3 = THREE.SceneUtils.createMultiMaterialObject(bangliao3_Geometry, materials_bangliao);
+            bangliao3 = THREE.SceneUtils.createMultiMaterialObject(bangliao3_Geometry, materials_bangliao_3);
             scene.add(bangliao3);
         }
 

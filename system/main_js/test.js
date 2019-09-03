@@ -49,6 +49,8 @@ let controls=[];
 
 let gui=new dat.GUI();
 
+Physijs.scripts.worker = '../../../import/physijs_worker.js';
+Physijs.scripts.ammo = '../../../import/ammo.js';
 
 
 //主函数
