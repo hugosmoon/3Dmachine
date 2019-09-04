@@ -35,6 +35,9 @@ let model_number=0;//记录加载模型的数量
 let last_frame_time=Date.now();//上一帧时间戳
 let frame_time=20;//当前时间戳
 
+let cut_start=false;//切削是否开始，与bangliao3的半径确定有关
+let cut_corner_end=false;//切削棒料角是否结束，与棒料2的长度及两端半径确定有关
+
 bangliao_r1=parseFloat(GetQueryString('bangliao_r'));
 bangliao_length=parseFloat(GetQueryString('bangliao_length'));
 main_angle=parseFloat(GetQueryString('main_angle'));
@@ -439,20 +442,40 @@ function render() {
             sigang.rotation.y+=frame_time*machine_speed*jjl*Math.PI/240000;
         }
 
-
+        
         if(cut_length>0&&cut_length<bcdl*trig('cot',main_angle)){
+            console.log('a:'+Date.now());
             deleteGroup(bangliao2);
             bangliao2_length=cut_length+0.0001;
             bangliao2_r2=bangliao_r1-cut_length*trig('tan',main_angle);
             bangliao2_Geometry=new THREE.CylinderGeometry(bangliao_r1, bangliao2_r2, bangliao2_length,360,20);
             bangliao2 = THREE.SceneUtils.createMultiMaterialObject(bangliao2_Geometry, materials_bangliao);
             scene.add(bangliao2);
-
-            deleteGroup(bangliao3);
-            bangliao3_Geometry=new THREE.CylinderGeometry(bangliao_r2, bangliao_r2, bangliao_length,360,100);
-            bangliao3 = THREE.SceneUtils.createMultiMaterialObject(bangliao3_Geometry, materials_bangliao);
-            scene.add(bangliao3);
+            if(!cut_start){
+                deleteGroup(bangliao3);
+                bangliao3_Geometry=new THREE.CylinderGeometry(bangliao_r2, bangliao_r2, bangliao_length,360,100);
+                bangliao3 = THREE.SceneUtils.createMultiMaterialObject(bangliao3_Geometry, materials_bangliao);
+                scene.add(bangliao3);
+                cut_start=true;
+            }
+            console.log('b:'+Date.now())
         }
+
+        else if(cut_length>0){
+            if(!cut_corner_end){
+                bangliao2_r2=bangliao_r2;
+                bangliao2_length=bcdl*trig('cot',main_angle);
+                deleteGroup(bangliao2);
+                bangliao2_length=cut_length+0.0001;
+                bangliao2_r2=bangliao_r1-cut_length*trig('tan',main_angle);
+                bangliao2_Geometry=new THREE.CylinderGeometry(bangliao_r1, bangliao2_r2, bangliao2_length,360,20);
+                bangliao2 = THREE.SceneUtils.createMultiMaterialObject(bangliao2_Geometry, materials_bangliao);
+                scene.add(bangliao2);
+                cut_corner_end=true;
+            }
+        }
+
+
 
         bangliao1.position.y=-6.5-bangliao_length/2+cut_length;
         bangliao2.position.y=-6.5-bangliao_length+cut_length-bangliao2_length/2;
