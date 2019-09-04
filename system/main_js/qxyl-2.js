@@ -472,7 +472,6 @@ function render() {
             console.log('b:'+Date.now())
         }
 
-<<<<<<< HEAD
         else if(cut_length>0){
             if(!cut_corner_end){
                 bangliao2_r2=bangliao_r2;
@@ -485,12 +484,6 @@ function render() {
                 scene.add(bangliao2);
                 cut_corner_end=true;
             }
-=======
-            deleteGroup(bangliao3);
-            bangliao3_Geometry=new THREE.CylinderGeometry(bangliao_r2, bangliao_r2, bangliao_length,360,100);
-            bangliao3 = THREE.SceneUtils.createMultiMaterialObject(bangliao3_Geometry, materials_bangliao_3);
-            scene.add(bangliao3);
->>>>>>> f02acd3bcc5cbb582f9f0123bebbfe3c0e9f9771
         }
 
 
