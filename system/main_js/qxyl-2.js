@@ -10,10 +10,10 @@ let szjp_pan,szjp_zhua1,szjp_zhua2,szjp_zhua3;
 
 let count=0;//计数器
 
-let bangliao1,bangliao2,bangliao3;
+let bangliao1,bangliao2,bangliao3,bagnliao4;
 let bangliao_r1=80,bangliao_r2=bangliao_r1-bcdl,bangliao2_r2=40;//未加工和已经加工的棒料半径
 let bangliao_length=600,cut_length=0,bangliao2_length=0.0001;
-let bangliao1_Geometry,bangliao2_Geometry,bangliao3_Geometry;
+let bangliao1_Geometry,bangliao2_Geometry,bangliao3_Geometry,bangliao4_Geometry;
 
 let daojujiaodubuchang=0;
 
@@ -126,7 +126,7 @@ function initObject() {
     let planeMaterial =
         new THREE.MeshLambertMaterial({color: 0x333300})
     plane = new THREE.Mesh(planeGeometry, planeMaterial);
-    plane.position.z = -1200;
+    plane.position.z = -950;
     plane.receiveShadow = true;//开启地面的接收阴影
     scene.add(plane);//添加到场景中
 
@@ -152,18 +152,18 @@ function initObject() {
         }),
     ];
 
-    //棒料的材质
-    materials_bangliao_3 = [
+    //未切削棒料的材质
+    materials_bangliao_0 = [
         new THREE.MeshPhongMaterial({
             opacity: 0.6,
             color: 0x434343,
             transparent: false,
             specular: 0x434343,
-            metal: true
+            // metal: true
         }),
     ];
 
-    //棒料3的材质
+    //已切削棒料的材质
     materials_bangliao = [
         new THREE.MeshPhongMaterial({
             opacity: 0.6,
@@ -245,20 +245,18 @@ function initObject() {
 
         bangliao1_Geometry=new THREE.CylinderGeometry(bangliao_r1, bangliao_r1, bangliao_length,72,100);
 
-        bangliao1 = THREE.SceneUtils.createMultiMaterialObject(bangliao1_Geometry, materials_bangliao);
+        bangliao1 = THREE.SceneUtils.createMultiMaterialObject(bangliao1_Geometry, materials_bangliao_0);
 
         bangliao2_Geometry=new THREE.CylinderGeometry(bangliao_r1, bangliao_r2, bangliao2_length,72,20);
         bangliao2 = THREE.SceneUtils.createMultiMaterialObject(bangliao2_Geometry, materials_bangliao);
-        // bangliao2.visible=false;
 
         bangliao3_Geometry=new THREE.CylinderGeometry(bangliao_r2, bangliao_r2, bangliao_length,72,100);
-        bangliao3 = THREE.SceneUtils.createMultiMaterialObject(bangliao3_Geometry, materials_bangliao_3);
-
-
+        bangliao3 = THREE.SceneUtils.createMultiMaterialObject(bangliao3_Geometry, materials_bangliao);
 
         scene.add(bangliao1);
         scene.add(bangliao2);
         scene.add(bangliao3);
+        
 
         console.log('棒料加载完成');
         model_number+=1;
@@ -450,6 +448,9 @@ function render() {
 
         if(cut_length<bangliao_length-200){
             cut_length+=jjl*frame_time*machine_speed/60000;
+            if(cut_length>=bangliao_length-200){
+                cut_length=bangliao_length-200;
+            }
             sigang.rotation.y+=frame_time*machine_speed*jjl*Math.PI/240000;
         }
 
@@ -467,6 +468,12 @@ function render() {
                 bangliao3_Geometry=new THREE.CylinderGeometry(bangliao_r2, bangliao_r2, bangliao_length,360,100);
                 bangliao3 = THREE.SceneUtils.createMultiMaterialObject(bangliao3_Geometry, materials_bangliao);
                 scene.add(bangliao3);
+
+                deleteGroup(bangliao4);
+                bangliao4_Geometry=new THREE.CylinderGeometry(bangliao_r2/2, bangliao_r2, bangliao_length,360,100);
+                bangliao4 = THREE.SceneUtils.createMultiMaterialObject(bangliao3_Geometry, materials_bangliao_0);
+                scene.add(bangliao4);
+
                 cut_start=true;
             }
             console.log('b:'+Date.now())
@@ -491,6 +498,7 @@ function render() {
         bangliao1.position.y=-6.5-bangliao_length/2+cut_length;
         bangliao2.position.y=-6.5-bangliao_length+cut_length-bangliao2_length/2;
         bangliao3.position.y=-6.5-bangliao_length/2;
+        bangliao3.position.y=-6.5-bangliao_length/2-0.1;
 
         tool.position.y=-6.5-bangliao_length+cut_length-bcdl*trig('cot',main_angle);
         tool.position.x=-bangliao_r1+bcdl;
@@ -571,7 +579,7 @@ var Main = {
 
             machine_speed=this.$refs.machine_speed.value;
             if(machine_speed==0){
-                this.$alert('机床转速不能为0～', '操作提示', {
+                this.$alert('主轴转速不能为0', '操作提示', {
                     confirmButtonText: '确定',
                     // callback: action => {
                     //     this.$message({
