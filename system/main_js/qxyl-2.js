@@ -3,8 +3,10 @@ let renderer, camera, scene;
 
 let main_angle=60,tool_minor_cutting_edge_angle=15,edge_inclination_angle=0,rake_angle=30,back_angle=10,secondary_edge_back_angl=10;
 let bcdl=0.2,jjl=1;
+let duidaobuchang=10;//对刀完成后后退的距离
 let machine_speed=0;
-let szjp_distance=15;
+let szjp_distance=15;//三爪夹盘爪子距离中心的高度
+
 
 let szjp_pan,szjp_zhua1,szjp_zhua2,szjp_zhua3;
 
@@ -105,16 +107,10 @@ function initThree() {
     let light3 = new THREE.AmbientLight(0xaaaaaa, 0.6);//环境光，如果不加，点光源照不到的地方就完全是黑色的
     scene.add(light3);
 
-    controller = new THREE.OrbitControls(camera, renderer.domElement);
+    let controller = new THREE.OrbitControls(camera, renderer.domElement);
     controller.target = new THREE.Vector3(0, 0, 0);
 
 }
-
-// // 摄像机的控制，可以采用鼠标拖动来控制视野
-// function cameraControl() {
-//     controller = new THREE.OrbitControls(camera, renderer.domElement);
-//     controller.target = new THREE.Vector3(0, 0, 0);
-// }
 
 
 
@@ -159,7 +155,7 @@ function initObject() {
             color: 0x434343,
             transparent: false,
             specular: 0x434343,
-            // metal: true
+            metal: true
         }),
     ];
 
@@ -253,9 +249,15 @@ function initObject() {
         bangliao3_Geometry=new THREE.CylinderGeometry(bangliao_r2, bangliao_r2, bangliao_length,72,100);
         bangliao3 = THREE.SceneUtils.createMultiMaterialObject(bangliao3_Geometry, materials_bangliao);
 
+        bangliao4_Geometry=new THREE.CylinderGeometry(bangliao_r1, bangliao_r1, bangliao_length,72,100);
+        bangliao4 = THREE.SceneUtils.createMultiMaterialObject(bangliao4_Geometry, materials_bangliao_0);
+        // bangliao4.visible=false;
+                
+
         scene.add(bangliao1);
         scene.add(bangliao2);
         scene.add(bangliao3);
+        scene.add(bangliao4);
         
 
         console.log('棒料加载完成');
@@ -447,10 +449,19 @@ function render() {
         szjp_zhua3.position.x=szjp_distance*Math.sin(-rot_angle-(4/3)*Math.PI);
 
         if(cut_length<bangliao_length-200){
-            cut_length+=jjl*frame_time*machine_speed/60000;
-            if(cut_length>=bangliao_length-200){
-                cut_length=bangliao_length-200;
+            if(duidaobuchang>0){
+                duidaobuchang-=frame_time*machine_speed/60000;
             }
+            else{
+                duidaobuchang=0;
+                cut_length+=jjl*frame_time*machine_speed/60000;
+                if(cut_length>=bangliao_length-200){
+                    cut_length=bangliao_length-200;
+                    machine_speed=0;
+                }
+
+            }
+            
             sigang.rotation.y+=frame_time*machine_speed*jjl*Math.PI/240000;
         }
 
@@ -468,12 +479,10 @@ function render() {
                 bangliao3_Geometry=new THREE.CylinderGeometry(bangliao_r2, bangliao_r2, bangliao_length,360,100);
                 bangliao3 = THREE.SceneUtils.createMultiMaterialObject(bangliao3_Geometry, materials_bangliao);
                 scene.add(bangliao3);
-
                 deleteGroup(bangliao4);
-                bangliao4_Geometry=new THREE.CylinderGeometry(bangliao_r2/2, bangliao_r2, bangliao_length,360,100);
-                bangliao4 = THREE.SceneUtils.createMultiMaterialObject(bangliao3_Geometry, materials_bangliao_0);
+                bangliao4_Geometry=new THREE.CylinderGeometry(bangliao_r2, bangliao_r2, 0.3,360,100);
+                bangliao4 = THREE.SceneUtils.createMultiMaterialObject(bangliao4_Geometry, materials_bangliao_0);
                 scene.add(bangliao4);
-
                 cut_start=true;
             }
             console.log('b:'+Date.now())
@@ -498,13 +507,13 @@ function render() {
         bangliao1.position.y=-6.5-bangliao_length/2+cut_length;
         bangliao2.position.y=-6.5-bangliao_length+cut_length-bangliao2_length/2;
         bangliao3.position.y=-6.5-bangliao_length/2;
-        bangliao3.position.y=-6.5-bangliao_length/2-0.1;
+        bangliao4.position.y=-6.5-bangliao_length/2-0.3;
 
-        tool.position.y=-6.5-bangliao_length+cut_length-bcdl*trig('cot',main_angle);
+        tool.position.y=-6.5-bangliao_length+cut_length-bcdl*trig('cot',main_angle)-duidaobuchang;
         tool.position.x=-bangliao_r1+bcdl;
 
-        daojia1.position.y=-101-bangliao_length+cut_length-bcdl*trig('cot',main_angle)+daojujiaodubuchang;
-        daojia2.position.y=-163-bangliao_length+cut_length-bcdl*trig('cot',main_angle)+daojujiaodubuchang;
+        daojia1.position.y=-101-bangliao_length+cut_length-bcdl*trig('cot',main_angle)+daojujiaodubuchang-duidaobuchang;
+        daojia2.position.y=-163-bangliao_length+cut_length-bcdl*trig('cot',main_angle)+daojujiaodubuchang-duidaobuchang;
         daojia2.position.x=-bangliao_r1+bcdl-100;
 
         if(model_number==9){
@@ -551,6 +560,7 @@ var Main = {
             },
             marks_cutting_depth: {
 
+                0:'0',
                 1: '1.0',
                 2: '2.0',
                 3: '3.0',
@@ -578,6 +588,8 @@ var Main = {
         start: function(){
 
             machine_speed=this.$refs.machine_speed.value;
+            bcdl=this.$refs.cutting_depth.value;
+            jjl=this.$refs.feed.value;
             if(machine_speed==0){
                 this.$alert('主轴转速不能为0', '操作提示', {
                     confirmButtonText: '确定',
@@ -590,8 +602,19 @@ var Main = {
                 });
                 return false;
             }
-            bcdl=this.$refs.cutting_depth.value;
-            jjl=this.$refs.feed.value;
+            if(bcdl==0){
+                this.$alert('背吃刀量不能为0', '操作提示', {
+                    confirmButtonText: '确定',
+                    // callback: action => {
+                    //     this.$message({
+                    //         type: 'info',
+                    //         message: `action: ${ action }`
+                    //     });
+                    // }
+                });
+                return false;
+            }
+            
             // this.$refs.machine_speed.disable=true;
             this.adjustable=true;
         },
@@ -647,94 +670,6 @@ function GetQueryString(name)
     var r = window.location.search.substr(1).match(reg);
     if(r!=null)return  unescape(r[2]); return null;
 }
-//
-// // //加载模型
-// // async function load_model(url,name,materials) {
-// //     let mesh=0;
-// //     let load_status=false;
-//
-// //
-// //     await abc();
-// //
-// //     alert('返回');
-// //     return mesh;
-// //
-// //     function abc(){
-// //         return new Promise(resolve => {
-// //             setTimeout(() => {
-// //                 if(!load_status){
-// //                     abc();
-// //                 }
-// //                 else {
-// //                     alert('qwer')
-// //                 }
-// //             }, 5000);
-// //         });
-// //     }
-// //
-// //
-// //
-// // }
-// let materials_szjp_pan = [
-//     new THREE.MeshPhongMaterial({
-//         opacity: 0.6,
-//         color: 0x212121,
-//         transparent: false,
-//
-//         metal: true
-//     }),
-// ];
-//
-// let status=false;
-//
-// async function reload_mesh(url,name,materials) {
-//
-//         let mesh;
-//
-//         let loader = new THREE.STLLoader();
-//
-//         loader.load(url, function (geometry) {
-//             geometry.center();
-//             mesh = THREE.SceneUtils.createMultiMaterialObject(geometry, materials);
-//             mesh.children.forEach(function (e) {
-//                 e.castShadow = true
-//             });
-//             mesh.receiveShadow = true;
-//             status=true;
-//             // console.log(mesh);
-//
-//         });
-//         console.log('123');
-//         // for (let i=0;i<100000000000000;i++){
-//         //     if(status){
-//         //         console.log('fanhui');
-//         //         return mesh;
-//         //     }
-//         //
-//         // }
-//
-//         await delay(3000)
-//
-//         function delay(time) {
-//             return new Promise(resolve => {
-//                 setTimeout(() => {
-//                     resolve('123333');
-//                 }, time);
-//             });
-//         }
-//
-//         console.log('12444');
-//         console.log(mesh);
-//         return Promise.resolve(mesh);
-//
-// }
-//
-// let aaaa=reload_mesh("../../../model/szjp_pan.STL",'name',materials_szjp_pan);
-//
-//
-//
-//
-
 
 
 
