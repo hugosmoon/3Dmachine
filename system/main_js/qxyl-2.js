@@ -152,9 +152,9 @@ function initObject() {
     materials_bangliao.push([
         new THREE.MeshPhongMaterial({
             opacity: 0.6,
-            color: 0x433232,
+            color: 0x545454,
             transparent: false,
-            specular: 0x433232,
+            specular: 0x545454,
             metal: true
         }),
     ]);
@@ -244,9 +244,9 @@ function initObject() {
 
         bangliao.push(create_cylinder(create_vertices(bangliao_r1,bangliao_r2,bangliao2_length).vertices,materials_bangliao[1],materials_bangliao[0],materials_bangliao[0]));
 
-        bangliao.push(create_cylinder(create_vertices(bangliao_r2,bangliao_r2,bangliao_length).vertices,materials_bangliao[1],materials_bangliao[0],materials_bangliao[0]));
+        bangliao.push(create_cylinder(create_vertices(bangliao_r2,bangliao_r2,bangliao_length-0.3).vertices,materials_bangliao[1],materials_bangliao[0],materials_bangliao[0]));
 
-        bangliao.push(create_cylinder(create_vertices(bangliao_r1,bangliao_r1,0.2).vertices,materials_bangliao[0],materials_bangliao[0],materials_bangliao[0]));
+        // bangliao.push(create_cylinder(create_vertices(bangliao_r1,bangliao_r1,0.3).vertices,materials_bangliao[0],materials_bangliao[0],materials_bangliao[0]));
 
         bangliao.forEach(function(e){
             e.rotation.x=0.5*Math.PI;
@@ -465,8 +465,8 @@ function render() {
                 vertices_arr[0]=create_vertices(bangliao_r1,bangliao_r1,bangliao_length-cut_length).vertices;
                 vertices_arr[1]=create_vertices(bangliao_r1,bangliao2_r2,cut_length).vertices;
                 vertices_arr[2]=create_vertices(bangliao_r2,bangliao_r2,bangliao_length).vertices;
-                vertices_arr[3]=create_vertices(bangliao2_r2,bangliao2_r2,0.3).vertices;
-                for(let i=0;i<4;i++){
+                // vertices_arr[3]=create_vertices(bangliao2_r2,bangliao2_r2,0.3).vertices;
+                for(let i=0;i<3;i++){
                     bangliao[i].children.forEach(function (e) {
                     e.geometry.vertices = vertices_arr[i];
                     e.geometry.verticesNeedUpdate = true;//通知顶点更新
@@ -483,8 +483,8 @@ function render() {
                     vertices_arr[0]=create_vertices(bangliao_r1,bangliao_r1,bangliao_length-cut_length).vertices;
                     vertices_arr[1]=create_vertices(bangliao_r1,bangliao_r2,cut_length).vertices;
                     vertices_arr[2]=create_vertices(bangliao_r2,bangliao_r2,bangliao_length).vertices;
-                    vertices_arr[3]=create_vertices(bangliao_r2,bangliao_r2,0.3).vertices;
-                    for(let i=0;i<4;i++){
+                    // vertices_arr[3]=create_vertices(bangliao_r2,bangliao_r2,0.3).vertices;
+                    for(let i=0;i<3;i++){
                         bangliao[i].children.forEach(function (e) {
                         e.geometry.vertices = vertices_arr[i];
                         e.geometry.verticesNeedUpdate = true;//通知顶点更新
@@ -513,7 +513,7 @@ function render() {
         bangliao[0].position.y=-65;
         bangliao[1].position.y=-65-bangliao_length+cut_length+bangliao2_length;
         bangliao[2].position.y=-65;
-        bangliao[3].position.y=-65-bangliao_length;
+        // bangliao[3].position.y=-65-bangliao_length+0.3;
 
         tool.position.y=-65-bangliao_length+cut_length-bcdl*trig('cot',main_angle)-duidaobuchang;
         tool.position.x=-bangliao_r1+bcdl;
