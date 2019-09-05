@@ -35,14 +35,19 @@ function create_vertices(r1,r2,h,num=720){
 }
 
 //创建圆柱
-function create_cylinder(vertices,materials){
-
+function create_cylinder(vertices,materials1,materials2,materials3){
+    
     let num=vertices.length/2;
     let faces=[],geom,mesh;
+    
+    // let material = new THREE.MeshBasicMaterial({ color: new THREE.Color(Math.random() * 0xffffff)});
+                
+
+    
     for(let i=0;i<num-2;i++){
         faces.push(new THREE.Face3(0, i+1, i+2))
     }
-
+    
     for(let i=0;i<num-2;i++){
         faces.push(new THREE.Face3(num, num+i+2, num+i+1))
     }
@@ -54,20 +59,28 @@ function create_cylinder(vertices,materials){
     }
     faces.push(new THREE.Face3(0, num-1, 2*num-1));
     faces.push(new THREE.Face3(0, 2*num-1, num));
-
+    
     geom = new THREE.Geometry();
+    
     geom.vertices = vertices;
     geom.faces = faces;
+
+    
+    
     geom.computeFaceNormals();//计算法向量，会对光照产生影响
 
     //两个材质放在一起使用
 
     //创建多材质对象，要引入SceneUtils.js文件，如果只有一个材质就不需要这个函数
-    mesh = THREE.SceneUtils.createMultiMaterialObject(geom, materials);
+    mesh = THREE.SceneUtils.createMultiMaterialObject(geom, materials1);
+    // mesh =new THREE.Mesh(geom, mats);
+    
     mesh.children.forEach(function (e) {
         e.castShadow = true
     });
     mesh.receiveShadow = true;
+
+    
 
     return mesh;
 

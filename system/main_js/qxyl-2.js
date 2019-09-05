@@ -37,7 +37,6 @@ let model_number=0;//记录加载模型的数量
 let last_frame_time=Date.now();//上一帧时间戳
 let frame_time=20;//当前时间戳
 
-let cut_start=false;//切削是否开始，与bangliao3的半径确定有关
 let cut_corner_end=false;//切削棒料角是否结束，与棒料2的长度及两端半径确定有关
 
 bangliao_r1=parseFloat(GetQueryString('bangliao_r'));
@@ -149,18 +148,20 @@ function initObject() {
     ];
 
     //未切削棒料的材质
-    materials_bangliao_0 = [
+    materials_bangliao=[];
+    materials_bangliao.push([
         new THREE.MeshPhongMaterial({
             opacity: 0.6,
-            color: 0x434343,
+            color: 0x433232,
             transparent: false,
-            specular: 0x434343,
+            specular: 0x433232,
             metal: true
         }),
-    ];
+    ]);
+    
 
     //已切削棒料的材质
-    materials_bangliao = [
+    materials_bangliao.push([
         new THREE.MeshPhongMaterial({
             opacity: 0.6,
             color: 0x545454,
@@ -168,7 +169,7 @@ function initObject() {
             specular: 0x545454,
             metal: true
         }),
-    ];
+    ]);
     //丝杠的材质
     materials_sigang = [
         new THREE.MeshPhongMaterial({
@@ -195,7 +196,7 @@ function initObject() {
     //尾座顶尖的材质
     let materials_weizuodingjian = [
         new THREE.MeshPhongMaterial({
-            opacity: 0.6,
+            opacity: 1,
             color: 0x323232,
             transparent: false,
             specular: 0x323232,
@@ -239,28 +240,28 @@ function initObject() {
         console.log('车刀加载完成');
         model_number+=1;
 
-        bangliao.push(create_cylinder(create_vertices(bangliao_r1,bangliao_r1,bangliao_length).vertices,materials_bangliao_0));
+        bangliao.push(create_cylinder(create_vertices(bangliao_r1,bangliao_r1,bangliao_length).vertices,materials_bangliao[0],materials_bangliao[0],materials_bangliao[0]));
 
-        bangliao.push(create_cylinder(create_vertices(bangliao_r1,bangliao_r2,bangliao2_length).vertices,materials_bangliao));
+        bangliao.push(create_cylinder(create_vertices(bangliao_r1,bangliao_r2,bangliao2_length).vertices,materials_bangliao[1],materials_bangliao[0],materials_bangliao[0]));
 
-        bangliao.push(create_cylinder(create_vertices(bangliao_r2,bangliao_r2,bangliao_length).vertices,materials_bangliao));
+        bangliao.push(create_cylinder(create_vertices(bangliao_r2,bangliao_r2,bangliao_length).vertices,materials_bangliao[1],materials_bangliao[0],materials_bangliao[0]));
 
-        bangliao.push(create_cylinder(create_vertices(bangliao_r1,bangliao_r1,0.3).vertices,materials_bangliao_0));
+        bangliao.push(create_cylinder(create_vertices(bangliao_r1,bangliao_r1,0.2).vertices,materials_bangliao[0],materials_bangliao[0],materials_bangliao[0]));
 
         bangliao.forEach(function(e){
             e.rotation.x=0.5*Math.PI;
             scene.add(e);
         });
         
+        // for(){
+
+        // }
+
+        
         console.log('棒料加载完成');
         model_number+=1;
 
     });
-
-
-
-
-
 
 
     loader.load("../../../model/szjp_pan.STL", function (geometry) {
@@ -476,6 +477,23 @@ function render() {
                 // console.log('a:'+Date.now());
             }
             else{
+                if(!cut_corner_end){
+                    cut_corner_end=true;
+                    let vertices_arr=[];
+                    vertices_arr[0]=create_vertices(bangliao_r1,bangliao_r1,bangliao_length-cut_length).vertices;
+                    vertices_arr[1]=create_vertices(bangliao_r1,bangliao_r2,cut_length).vertices;
+                    vertices_arr[2]=create_vertices(bangliao_r2,bangliao_r2,bangliao_length).vertices;
+                    vertices_arr[3]=create_vertices(bangliao_r2,bangliao_r2,0.3).vertices;
+                    for(let i=0;i<4;i++){
+                        bangliao[i].children.forEach(function (e) {
+                        e.geometry.vertices = vertices_arr[i];
+                        e.geometry.verticesNeedUpdate = true;//通知顶点更新
+                        e.geometry.elementsNeedUpdate = true;//特别重要，通知线条连接方式更新
+                        e.geometry.computeFaceNormals();
+                    });
+                }
+
+                }
                 let vertices_arr=[];
                 vertices_arr[0]=create_vertices(bangliao_r1,bangliao_r1,bangliao_length-cut_length).vertices;
                 bangliao[0].children.forEach(function (e) {
@@ -495,7 +513,7 @@ function render() {
         bangliao[0].position.y=-65;
         bangliao[1].position.y=-65-bangliao_length+cut_length+bangliao2_length;
         bangliao[2].position.y=-65;
-        bangliao[3].position.y=-65-bangliao_length+cut_length;
+        bangliao[3].position.y=-65-bangliao_length;
 
         tool.position.y=-65-bangliao_length+cut_length-bcdl*trig('cot',main_angle)-duidaobuchang;
         tool.position.x=-bangliao_r1+bcdl;
