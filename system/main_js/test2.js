@@ -1,54 +1,16 @@
 let renderer, camera, scene;
 //hugosmoon
 
-let main_angle=60,tool_minor_cutting_edge_angle=15,edge_inclination_angle=0,rake_angle=30,back_angle=10,secondary_edge_back_angl=10;
-let bcdl=0.2,jjl=1;
-let machine_speed=0;
-let szjp_distance=15;
-
-let szjp_pan,szjp_zhua1,szjp_zhua2,szjp_zhua3;
-
-let count=0;//计数器
-
-let bangliao1,bangliao2,bangliao3;
-let bangliao_r1=80,bangliao_r2=bangliao_r1-bcdl,bangliao2_r2=40;//未加工和已经加工的棒料半径
-let bangliao_length=600,cut_length=0,bangliao2_length=0.0001;
-let bangliao1_Geometry,bangliao2_Geometry,bangliao3_Geometry;
-
-let daojujiaodubuchang=0;
-
-let rot_angle=0;
-
-let materials_bangliao;
-let plane;
-
-let weizuo;
-let weizuodingjian;
-let daojia1,daojia2;
-let jichuang;
-let tool;
-let sigang;
-let load_status=false;
-
-let model_number=0;//记录加载模型的数量
-
-let last_frame_time=Date.now();//上一帧时间戳
-let frame_time=20;//当前时间戳
-
-let models=[];
-
-let controls=[];
-//     = new function () {
-//
-//     this.x=0;
-//     this.y=0;
-//     this.z=0
-// };
 
 let gui=new dat.GUI();
 
-// Physijs.scripts.worker = '../../../import/physijs_worker.js';
-// Physijs.scripts.ammo = '../../../import/ammo.js';
+let mesh,mesh2;
+
+// let num=0;
+
+// let vertices=[];//对象顶点
+// let faces=[];//对象面
+
 
 
 //主函数
@@ -77,9 +39,9 @@ function initThree() {
     camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000);//perspective是透视摄像机，这种摄像机看上去画面有3D效果
 
     //摄像机的位置
-    camera.position.x = -1500;
-    camera.position.y = -1500;
-    camera.position.z = 500;
+    camera.position.x = -150;
+    camera.position.y = -150;
+    camera.position.z = 50;
     camera.up.x = 0;
     camera.up.y = 0;
     camera.up.z = 1;//摄像机的上方向是Z轴
@@ -108,137 +70,116 @@ function initThree() {
 }
 
 function initObject() {
-    //地面
-    let planeGeometry = new THREE.PlaneGeometry(5000, 5000, 20, 20);
-    let planeMaterial =
-        new THREE.MeshLambertMaterial({color: 0x333300})
-    plane = new THREE.Mesh(planeGeometry, planeMaterial);
-    plane.position.z = -1200;
-    plane.receiveShadow = true;//开启地面的接收阴影
-    scene.add(plane);//添加到场景中
 
-    //材质1
-    let materials_1 = [
+    let materials = [
         new THREE.MeshPhongMaterial({
             opacity: 0.6,
-            color: 0x212121,
-            transparent: false,
-            specular: 0x545454,
-            metal: true
-        }),
-    ];
-    let materials_2 = [
-        new THREE.MeshPhongMaterial({
-            opacity: 0.6,
-            color: 0x0000ff,
+            color: 0x545454,
             transparent: false,
             specular: 0x545454,
             metal: true
         }),
     ];
 
-    var loader = new THREE.STLLoader();
-    loader.load("../../../model/6140.STL", function (geometry) {
-        geometry.center();
-
-        // geometry.computeBoundingBox();
-        // console.log(geometry.boundingBox.min.x);
-        // console.log(geometry.boundingBox.max.x);
-        // console.log(geometry.boundingBox.min.y);
-        // console.log(geometry.boundingBox.max.y);
-        // console.log(geometry.boundingBox.min.z);
-        // console.log(geometry.boundingBox.max.z);
-
-
-        models['机床'] = THREE.SceneUtils.createMultiMaterialObject(geometry, materials_1);
-        models['机床'].rotation.x =  0.5 *Math.PI;
-        models['机床'].children.forEach(function (e) {
-            e.castShadow = true
-        });
-        models['机床'].receiveShadow = true;
-
-        // jichuang.rotation.y =  -0.5 *Math.PI;
-        // jichuang.position.x=30;
-        // jichuang.position.y=-250;
-        // jichuang.position.z=-376;
-
-        scene.add(models['机床']);
-        addToGui(gui,geometry,'机床');
-
-
-        console.log('机床加载完成');
-
-
-    });
-
-    loader.load("../../../model/daojia1.STL", function (geometry) {
-        geometry.center();
-        models['刀架'] = THREE.SceneUtils.createMultiMaterialObject(geometry, materials_2);
-
-        models['刀架'].children.forEach(function (e) {
-            e.castShadow = true
-        });
-        models['刀架'].receiveShadow = true;
-        scene.add( models['刀架']);
-        console.log('刀架1加载完成');
-
-        addToGui(gui,geometry,'刀架');
-    });
+    let yuanzhu=create_vertices(10,2,50);
+    let vertices=yuanzhu.vertices;
+    mesh=create_cylinder(vertices,materials);
+    mesh2=create_cylinder(vertices,materials);
+    scene.add(mesh);  
+    scene.add(mesh2);    
 
 }
 function render() {
     try {
-        switch_models('机床');
-        switch_models('刀架');
-
-        models['机床'].rotation.x=90*Math.PI/180;
-
-        models['刀架'].rotation.x=90*Math.PI/180;
-        models['刀架'].rotation.y=-90*Math.PI/180;
-        models['刀架'].position.y=-96.5;
-        models['刀架'].position.z=113.2;
-
+       
     }
     catch (e) {
 
     }
 
+    let vertices = [];
+    vertices=create_vertices(20,20,15).vertices;
+    mesh.children.forEach(function (e) {
+        e.geometry.vertices = vertices;
+        e.geometry.verticesNeedUpdate = true;//通知顶点更新
+        e.geometry.elementsNeedUpdate = true;//特别重要，通知线条连接方式更新
+        e.geometry.computeFaceNormals();
+    });
+
     requestAnimationFrame(render);
     renderer.render(scene, camera);
 }
 
+// let abc=create_points(10,10)
 
-function addToGui(gui,geometry,name){
+// //创建顶点
+// function create_vertices(r1,r2,h,num=720){
+//     let degree=(Math.PI/180)*360/num;
+//     let points=[]
+//     let vertices=[];
+//     for(let i=0;i<num;i++){
 
-    geometry.computeBoundingBox();
+//         points[i]=[];
+//         points[i][0]=[];
+//         points[i][1]=[];
 
-    controls[name]=new function () {
-    this.position_x=1;
-    this.position_y=1;
-    this.position_z=1;
+//         points[i][0]['x']=r1*Math.sin(i*degree);
+//         points[i][0]['y']=r1*Math.cos(i*degree);
+//         points[i][0]['z']=0;
 
-    this.rotation_x=0;
-    this.rotation_y=0;
-    this.rotation_z=0;
-};
-    let folder = gui.addFolder(name);
-    folder.add(controls[name],"position_x",geometry.boundingBox.min.x,geometry.boundingBox.max.x);
-    folder.add(controls[name],"position_y",geometry.boundingBox.min.y,geometry.boundingBox.max.y);
-    folder.add(controls[name],"position_z",geometry.boundingBox.min.z,geometry.boundingBox.max.z);
-    folder.add(controls[name],"rotation_x",-360,360);
-    folder.add(controls[name],"rotation_y",-360,360);
-    folder.add(controls[name],"rotation_z",-360,360);
+//         points[i][1]['x']=r2*Math.sin(i*degree);
+//         points[i][1]['y']=r2*Math.cos(i*degree);
+//         points[i][1]['z']=h;
 
+//     }
 
-}
+//     for(let j=0;j<2;j++){
+//         for(let i=0;i<points.length;i++){
+//             vertices.push(new THREE.Vector3(points[i][j]['x'], points[i][j]['y'], points[i][j]['z']))
+//         }
+//     }
 
-function switch_models(name){
-    models[name].position.x=controls[name].position_x;
-    models[name].position.y=controls[name].position_y;
-    models[name].position.z=controls[name].position_z;
+//     let obj=new function(){
+//         this.vertices=vertices;
+//         this.num=num;   
+//     }
+//     return obj;
+// }
 
-    models[name].rotation.x=controls[name].rotation_x*Math.PI/180;
-    models[name].rotation.y=controls[name].rotation_y*Math.PI/180;
-    models[name].rotation.z=controls[name].rotation_z*Math.PI/180;
+// //创建圆柱
+// function create_cylinder(vertices,num,materials){
 
-}
+//     let faces=[],geom,mesh;
+//     for(let i=0;i<num-2;i++){
+//         faces.push(new THREE.Face3(0, i+1, i+2))
+//     }
+
+//     for(let i=0;i<num-2;i++){
+//         faces.push(new THREE.Face3(num, num+i+2, num+i+1))
+//     }
+
+//     for(let i=0;i<num-1;i++){
+//         faces.push(new THREE.Face3(i, i+num, i+num+1))
+//         faces.push(new THREE.Face3(i, i+num+1, i+1))
+
+//     }
+//     faces.push(new THREE.Face3(0, num-1, 2*num-1));
+//     faces.push(new THREE.Face3(0, 2*num-1, num));
+
+//     geom = new THREE.Geometry();
+//     geom.vertices = vertices;
+//     geom.faces = faces;
+//     geom.computeFaceNormals();//计算法向量，会对光照产生影响
+
+//     //两个材质放在一起使用
+
+//     //创建多材质对象，要引入SceneUtils.js文件，如果只有一个材质就不需要这个函数
+//     mesh = THREE.SceneUtils.createMultiMaterialObject(geom, materials);
+//     mesh.children.forEach(function (e) {
+//         e.castShadow = true
+//     });
+//     mesh.receiveShadow = true;
+
+//     return mesh;
+
+// }

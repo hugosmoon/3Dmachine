@@ -441,7 +441,7 @@ var Main = {
             url+=('back_angle='+this.$refs.back_angle.value)+'&';
             url+=('secondary_edge_back_angl='+this.$refs.secondary_edge_back_angl.value)+'&';
             url+=('bangliao_r='+this.$refs.bangdliao_r.value)+'&';
-            url+=('bangliao_length='+(this.$refs.bangliao_length.value+127))+'&';
+            url+=('bangliao_length='+(this.$refs.bangliao_length.value+100))+'&';
             url+=('daojujiaodubuchang='+daojujiaodubuchang)+'&';
             window.location.href=url;
         }

@@ -1,54 +1,12 @@
 let renderer, camera, scene;
 //hugosmoon
 
-let main_angle=60,tool_minor_cutting_edge_angle=15,edge_inclination_angle=0,rake_angle=30,back_angle=10,secondary_edge_back_angl=10;
-let bcdl=0.2,jjl=1;
-let machine_speed=0;
-let szjp_distance=15;
-
-let szjp_pan,szjp_zhua1,szjp_zhua2,szjp_zhua3;
-
-let count=0;//计数器
-
-let bangliao1,bangliao2,bangliao3;
-let bangliao_r1=80,bangliao_r2=bangliao_r1-bcdl,bangliao2_r2=40;//未加工和已经加工的棒料半径
-let bangliao_length=600,cut_length=0,bangliao2_length=0.0001;
-let bangliao1_Geometry,bangliao2_Geometry,bangliao3_Geometry;
-
-let daojujiaodubuchang=0;
-
-let rot_angle=0;
-
-let materials_bangliao;
-let plane;
-
-let weizuo;
-let weizuodingjian;
-let daojia1,daojia2;
-let jichuang;
-let tool;
-let sigang;
-let load_status=false;
-
-let model_number=0;//记录加载模型的数量
-
-let last_frame_time=Date.now();//上一帧时间戳
-let frame_time=20;//当前时间戳
 
 let models=[];
 
 let controls=[];
-//     = new function () {
-//
-//     this.x=0;
-//     this.y=0;
-//     this.z=0
-// };
 
 let gui=new dat.GUI();
-
-// Physijs.scripts.worker = '../../../import/physijs_worker.js';
-// Physijs.scripts.ammo = '../../../import/ammo.js';
 
 
 //主函数

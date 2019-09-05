@@ -12,7 +12,7 @@ let szjp_pan,szjp_zhua1,szjp_zhua2,szjp_zhua3;
 
 let count=0;//计数器
 
-let bangliao1,bangliao2,bangliao3,bagnliao4;
+let bangliao=[];
 let bangliao_r1=80,bangliao_r2=bangliao_r1-bcdl,bangliao2_r2=40;//未加工和已经加工的棒料半径
 let bangliao_length=600,cut_length=0,bangliao2_length=0.0001;
 let bangliao1_Geometry,bangliao2_Geometry,bangliao3_Geometry,bangliao4_Geometry;
@@ -239,27 +239,19 @@ function initObject() {
         console.log('车刀加载完成');
         model_number+=1;
 
-        bangliao1_Geometry=new THREE.CylinderGeometry(bangliao_r1, bangliao_r1, bangliao_length,72,100);
+        bangliao.push(create_cylinder(create_vertices(bangliao_r1,bangliao_r1,bangliao_length).vertices,materials_bangliao_0));
 
-        bangliao1 = THREE.SceneUtils.createMultiMaterialObject(bangliao1_Geometry, materials_bangliao_0);
+        bangliao.push(create_cylinder(create_vertices(bangliao_r1,bangliao_r2,bangliao2_length).vertices,materials_bangliao));
 
-        bangliao2_Geometry=new THREE.CylinderGeometry(bangliao_r1, bangliao_r2, bangliao2_length,72,20);
-        bangliao2 = THREE.SceneUtils.createMultiMaterialObject(bangliao2_Geometry, materials_bangliao);
+        bangliao.push(create_cylinder(create_vertices(bangliao_r2,bangliao_r2,bangliao_length).vertices,materials_bangliao));
 
-        bangliao3_Geometry=new THREE.CylinderGeometry(bangliao_r2, bangliao_r2, bangliao_length,72,100);
-        bangliao3 = THREE.SceneUtils.createMultiMaterialObject(bangliao3_Geometry, materials_bangliao);
+        bangliao.push(create_cylinder(create_vertices(bangliao_r1,bangliao_r1,0.3).vertices,materials_bangliao_0));
 
-        bangliao4_Geometry=new THREE.CylinderGeometry(bangliao_r1, bangliao_r1, bangliao_length,72,100);
-        bangliao4 = THREE.SceneUtils.createMultiMaterialObject(bangliao4_Geometry, materials_bangliao_0);
-        // bangliao4.visible=false;
-                
-
-        scene.add(bangliao1);
-        scene.add(bangliao2);
-        scene.add(bangliao3);
-        scene.add(bangliao4);
+        bangliao.forEach(function(e){
+            e.rotation.x=0.5*Math.PI;
+            scene.add(e);
+        });
         
-
         console.log('棒料加载完成');
         model_number+=1;
 
@@ -421,8 +413,8 @@ function render() {
     try
     {
 
-        weizuo.position.y=-390-bangliao_length-5;
-        weizuodingjian.position.y=-27-bangliao_length;
+        weizuo.position.y=-448.5-bangliao_length-5;
+        weizuodingjian.position.y=-85.5-bangliao_length;
 
         
 
@@ -433,8 +425,6 @@ function render() {
 
         szjp_pan.rotation.z=30*(Math.PI/180)-Math.PI+rot_angle;
         weizuodingjian.rotation.y=-Math.PI+rot_angle;
-        bangliao1.rotation.y=- Math.PI+rot_angle;
-        bangliao3.rotation.y=- Math.PI+rot_angle;
 
         szjp_zhua1.rotation.z=0.5 * Math.PI+rot_angle;
         szjp_zhua1.position.z=szjp_distance*Math.cos(-rot_angle);
@@ -448,15 +438,15 @@ function render() {
         szjp_zhua3.position.z=szjp_distance*Math.cos(-rot_angle-(4/3)*Math.PI);
         szjp_zhua3.position.x=szjp_distance*Math.sin(-rot_angle-(4/3)*Math.PI);
 
-        if(cut_length<bangliao_length-200){
+        if(cut_length<bangliao_length-100){
             if(duidaobuchang>0){
                 duidaobuchang-=frame_time*machine_speed/60000;
             }
             else{
                 duidaobuchang=0;
                 cut_length+=jjl*frame_time*machine_speed/60000;
-                if(cut_length>=bangliao_length-200){
-                    cut_length=bangliao_length-200;
+                if(cut_length>=bangliao_length-100){
+                    cut_length=bangliao_length-100;
                     machine_speed=0;
                 }
 
@@ -465,55 +455,53 @@ function render() {
             sigang.rotation.y+=frame_time*machine_speed*jjl*Math.PI/240000;
         }
 
-        
-        if(cut_length>0&&cut_length<bcdl*trig('cot',main_angle)){
-            console.log('a:'+Date.now());
-            deleteGroup(bangliao2);
-            bangliao2_length=cut_length+0.0001;
-            bangliao2_r2=bangliao_r1-cut_length*trig('tan',main_angle);
-            bangliao2_Geometry=new THREE.CylinderGeometry(bangliao_r1, bangliao2_r2, bangliao2_length,360,20);
-            bangliao2 = THREE.SceneUtils.createMultiMaterialObject(bangliao2_Geometry, materials_bangliao);
-            scene.add(bangliao2);
-            if(!cut_start){
-                deleteGroup(bangliao3);
-                bangliao3_Geometry=new THREE.CylinderGeometry(bangliao_r2, bangliao_r2, bangliao_length,360,100);
-                bangliao3 = THREE.SceneUtils.createMultiMaterialObject(bangliao3_Geometry, materials_bangliao);
-                scene.add(bangliao3);
-                deleteGroup(bangliao4);
-                bangliao4_Geometry=new THREE.CylinderGeometry(bangliao_r2, bangliao_r2, 0.3,360,100);
-                bangliao4 = THREE.SceneUtils.createMultiMaterialObject(bangliao4_Geometry, materials_bangliao_0);
-                scene.add(bangliao4);
-                cut_start=true;
-            }
-            console.log('b:'+Date.now())
-        }
-
-        else if(cut_length>0){
-            if(!cut_corner_end){
-                bangliao2_r2=bangliao_r2;
-                bangliao2_length=bcdl*trig('cot',main_angle);
-                deleteGroup(bangliao2);
-                bangliao2_length=cut_length+0.0001;
+        if(cut_length>0){
+            
+            if(cut_length<bcdl*trig('cot',main_angle)){
+                // console.log('b:'+Date.now());
                 bangliao2_r2=bangliao_r1-cut_length*trig('tan',main_angle);
-                bangliao2_Geometry=new THREE.CylinderGeometry(bangliao_r1, bangliao2_r2, bangliao2_length,360,20);
-                bangliao2 = THREE.SceneUtils.createMultiMaterialObject(bangliao2_Geometry, materials_bangliao);
-                scene.add(bangliao2);
-                cut_corner_end=true;
+                let vertices_arr=[];
+                vertices_arr[0]=create_vertices(bangliao_r1,bangliao_r1,bangliao_length-cut_length).vertices;
+                vertices_arr[1]=create_vertices(bangliao_r1,bangliao2_r2,cut_length).vertices;
+                vertices_arr[2]=create_vertices(bangliao_r2,bangliao_r2,bangliao_length).vertices;
+                vertices_arr[3]=create_vertices(bangliao2_r2,bangliao2_r2,0.3).vertices;
+                for(let i=0;i<4;i++){
+                    bangliao[i].children.forEach(function (e) {
+                    e.geometry.vertices = vertices_arr[i];
+                    e.geometry.verticesNeedUpdate = true;//通知顶点更新
+                    e.geometry.elementsNeedUpdate = true;//特别重要，通知线条连接方式更新
+                    e.geometry.computeFaceNormals();
+                });
+                }
+                // console.log('a:'+Date.now());
             }
+            else{
+                let vertices_arr=[];
+                vertices_arr[0]=create_vertices(bangliao_r1,bangliao_r1,bangliao_length-cut_length).vertices;
+                bangliao[0].children.forEach(function (e) {
+                    e.geometry.vertices = vertices_arr[0];
+                    e.geometry.verticesNeedUpdate = true;//通知顶点更新
+                    e.geometry.elementsNeedUpdate = true;//特别重要，通知线条连接方式更新
+                    e.geometry.computeFaceNormals();
+                });
+            }
+           
         }
+        
 
 
 
-        bangliao1.position.y=-6.5-bangliao_length/2+cut_length;
-        bangliao2.position.y=-6.5-bangliao_length+cut_length-bangliao2_length/2;
-        bangliao3.position.y=-6.5-bangliao_length/2;
-        bangliao4.position.y=-6.5-bangliao_length/2-0.3;
 
-        tool.position.y=-6.5-bangliao_length+cut_length-bcdl*trig('cot',main_angle)-duidaobuchang;
+        bangliao[0].position.y=-65;
+        bangliao[1].position.y=-65-bangliao_length+cut_length+bangliao2_length;
+        bangliao[2].position.y=-65;
+        bangliao[3].position.y=-65-bangliao_length+cut_length;
+
+        tool.position.y=-65-bangliao_length+cut_length-bcdl*trig('cot',main_angle)-duidaobuchang;
         tool.position.x=-bangliao_r1+bcdl;
 
-        daojia1.position.y=-101-bangliao_length+cut_length-bcdl*trig('cot',main_angle)+daojujiaodubuchang-duidaobuchang;
-        daojia2.position.y=-163-bangliao_length+cut_length-bcdl*trig('cot',main_angle)+daojujiaodubuchang-duidaobuchang;
+        daojia1.position.y=-159.5-bangliao_length+cut_length-bcdl*trig('cot',main_angle)+daojujiaodubuchang-duidaobuchang;
+        daojia2.position.y=-221.5-bangliao_length+cut_length-bcdl*trig('cot',main_angle)+daojujiaodubuchang-duidaobuchang;
         daojia2.position.x=-bangliao_r1+bcdl-100;
 
         if(model_number==9){
@@ -669,11 +657,6 @@ function GetQueryString(name)
     var r = window.location.search.substr(1).match(reg);
     if(r!=null)return  unescape(r[2]); return null;
 }
-
-
-
-
-
 
 
 
