@@ -49,7 +49,7 @@ back_angle=parseFloat(GetQueryString('back_angle'));
 secondary_edge_back_angl=parseFloat(GetQueryString('secondary_edge_back_angl'));
 daojujiaodubuchang=parseFloat(GetQueryString('daojujiaodubuchang'));
 
-
+let stats = initStats();
 //
 // let controls = new function () {
 //
@@ -67,6 +67,7 @@ daojujiaodubuchang=parseFloat(GetQueryString('daojujiaodubuchang'));
 
 //初始化渲染器
 function initThree() {
+    
     renderer = new THREE.WebGLRenderer({
         antialias: true
     });//定义渲染器
@@ -405,6 +406,8 @@ function initObject() {
 //动画
 function render() {
 
+    stats.update();
+
     szjp_distance=bangliao_r1+45;
     bangliao_r2=bangliao_r1-bcdl;
 
@@ -676,5 +679,19 @@ function GetQueryString(name)
     if(r!=null)return  unescape(r[2]); return null;
 }
 
+function initStats() {
+
+    var stats = new Stats();
+    stats.setMode(0); // 0: fps, 1: ms
+
+    // Align top-left
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.left = '0px';
+    stats.domElement.style.top = '0px';
+
+    document.getElementById("Stats-output").appendChild(stats.domElement);
+
+    return stats;
+}
 
 
