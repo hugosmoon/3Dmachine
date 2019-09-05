@@ -586,11 +586,7 @@ var Main = {
 
         },
         start: function(){
-
-            machine_speed=this.$refs.machine_speed.value;
-            bcdl=this.$refs.cutting_depth.value;
-            jjl=this.$refs.feed.value;
-            if(machine_speed==0){
+            if(this.$refs.machine_speed.value==0){
                 this.$alert('主轴转速不能为0', '操作提示', {
                     confirmButtonText: '确定',
                     // callback: action => {
@@ -602,7 +598,7 @@ var Main = {
                 });
                 return false;
             }
-            if(bcdl==0){
+            if(this.$refs.cutting_depth.value==0){
                 this.$alert('背吃刀量不能为0', '操作提示', {
                     confirmButtonText: '确定',
                     // callback: action => {
@@ -614,6 +610,9 @@ var Main = {
                 });
                 return false;
             }
+            machine_speed=this.$refs.machine_speed.value;
+            bcdl=this.$refs.cutting_depth.value;
+            jjl=this.$refs.feed.value;
             
             // this.$refs.machine_speed.disable=true;
             this.adjustable=true;

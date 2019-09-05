@@ -37,8 +37,6 @@ let frame_time=20;//当前时间戳
 
 let models=[];
 
-
-
 let controls=[];
 //     = new function () {
 //
@@ -49,8 +47,8 @@ let controls=[];
 
 let gui=new dat.GUI();
 
-Physijs.scripts.worker = '../../../import/physijs_worker.js';
-Physijs.scripts.ammo = '../../../import/ammo.js';
+// Physijs.scripts.worker = '../../../import/physijs_worker.js';
+// Physijs.scripts.ammo = '../../../import/ammo.js';
 
 
 //主函数
