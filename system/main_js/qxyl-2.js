@@ -121,7 +121,7 @@ function initObject() {
     //地面
     let planeGeometry = new THREE.PlaneGeometry(5000, 5000, 20, 20);
     let planeMaterial =
-        new THREE.MeshLambertMaterial({color: 0x333300})
+        new THREE.MeshLambertMaterial({color: 0x232323})
     plane = new THREE.Mesh(planeGeometry, planeMaterial);
     plane.position.z = -950;
     plane.receiveShadow = true;//开启地面的接收阴影
@@ -538,7 +538,7 @@ function render() {
         count+=1;
 
         if(count%10==0){
-            if(cut_length>0){
+            if(cut_length>0&&machine_speed>0){
                 draw_chart(chart_line1,Math.round(cut_length*10)/10,Math.round(Math.random()*200));
             }
             
@@ -720,7 +720,7 @@ function initStats() {
     // Align top-left
     stats.domElement.style.position = 'absolute';
     stats.domElement.style.left = '0px';
-    stats.domElement.style.top = '0px';
+    stats.domElement.style.top = '95%';
 
     document.getElementById("Stats-output").appendChild(stats.domElement);
 

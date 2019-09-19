@@ -18,7 +18,7 @@ function chart_line(container_id,chart_type,title_chart,title_x,title_y,unit_x,u
             formatter: function (params) {
                 params1 = params[0];
                 // console.log(params1.data.name_x);
-                return params1.data.name_x + ' : ' + params1.value[0]+'  '+ params1.data.name_y + ' : ' + params1.value[1]+' N\n';
+                return params1.data.name_x + ' : ' + params1.value[0]+unit_x+'  '+ params1.data.name_y + ' : ' + params1.value[1]+unit_y;
             },
             axisPointer: {
                 animation: false
@@ -27,7 +27,7 @@ function chart_line(container_id,chart_type,title_chart,title_x,title_y,unit_x,u
         xAxis: {
             type: 'value',
             name: title_x+'/'+unit_x,
-            nameLocation:'middle',
+            nameLocation:'middle',  
             nameGap:25,
             nameTextStyle:{
                 fontWeight:'bold'
