@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="icon" href="../../logo.ico">
+    <title>测试</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../../import/css/index.css">
+    <link rel="stylesheet" href="../../main_css/main.css">
+    <!-- 引入组件库 -->
+    <script src="../../../import/echarts.min.js"></script>
+    <script src="../../../import/echarts-gl.min.js"></script>
+    <!-- <script src="../../../import/three.js"></script>
+    <script src="../../../import/stats.js"></script>
+    <script src="../../../import/Setting.js"></script>
+    <script src="../../../import/OrbitControls.js"></script>
+    <script src="../../../import/dat.gui.min.js"></script>
+    <script src="../../../import/SceneUtils.js"></script>
+    <script src="../../../import/jquery-3.4.1.min.js"></script>
+    <script src="../../../import/dat.gui.js"></script>
+    <script src="../../../import2/Detector.js"></script> -->
+    <!-- <script src="../../../import2/OrbitControls.js"></script> -->
+
+</head>
+<body>
+<div id="container" style="height: 500px;width: 100%;"></div>
+
+<script src="../../main_js/chart_line.js"></script>
+<script>
+       let a=new chart_line('container','dark','切削力计算','切削长度','主切削力','mm','N');
+       let length=500;
+       for (let i = 0; i < length; i++) {
+           a.push_data(i,Math.round(Math.random()*2000));
+       }
+       a.update();
+       
+       setInterval(function () {
+        for (let i = 0; i < 2; i++) {
+            a.delete_data();
+            a.push_data(length,Math.round(Math.random()*2000))
+            length+=1;    
+        }
+        a.update();
+        }, 100);
+</script>
+</body>
+</html>

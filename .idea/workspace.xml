@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a71f4657-b63f-4e0a-9cc1-de8010ff5b85" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/lab/test/test2.html" beforeDir="false" afterPath="$PROJECT_DIR$/system/lab/test/test2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/main_js/qxyl-2.js" beforeDir="false" afterPath="$PROJECT_DIR$/system/main_js/qxyl-2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/main_js/test2.js" beforeDir="false" afterPath="$PROJECT_DIR$/system/main_js/test2.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -16,28 +19,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/lab/vertices/qxyl-1.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="52" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/system/main_js/qxyl-1.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2917">
-              <caret line="392" selection-start-line="392" selection-end-line="392" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/lab/vertices/qxyl-2.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-87">
-              <caret line="32" column="6" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
+            <state relative-caret-position="6090">
+              <caret line="406" selection-start-line="406" selection-end-line="406" />
             </state>
           </provider>
         </entry>
@@ -46,25 +31,25 @@
         <entry file="file://$PROJECT_DIR$/system/main_js/qxyl-2.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="447">
-              <caret line="200" selection-start-line="200" selection-end-line="200" />
+              <caret line="212" selection-start-line="212" selection-end-line="212" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/lab/vertices/test1.html">
+        <entry file="file://$PROJECT_DIR$/system/lab/test/test3.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
+            <state relative-caret-position="463">
+              <caret line="128" column="42" selection-start-line="128" selection-start-column="42" selection-end-line="128" selection-end-column="42" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/system/main_js/test.js">
+        <entry file="file://$PROJECT_DIR$/import2/three.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="198" column="38" selection-start-line="198" selection-start-column="38" selection-end-line="198" selection-end-column="38" />
+            <state relative-caret-position="-1862">
+              <caret line="14716" column="46" selection-start-line="14716" selection-start-column="46" selection-end-line="14716" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -81,7 +66,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>vectorConcrol</find>
       <find>controlPoints</find>
       <find>main_angle</find>
       <find>faces</find>
@@ -111,6 +95,7 @@
       <find>reload_mesh</find>
       <find>computeBoundingBox</find>
       <find>jichuang.position.</find>
+      <find>this.material</find>
     </findStrings>
     <replaceStrings>
       <replace>'e',</replace>
@@ -168,6 +153,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -191,7 +177,7 @@
               <item name="virtual-machining" type="462c0819:PsiDirectoryNode" />
               <item name="system" type="462c0819:PsiDirectoryNode" />
               <item name="lab" type="462c0819:PsiDirectoryNode" />
-              <item name="vertices" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="virtual-machining" type="b2602c69:ProjectViewProjectNode" />
@@ -209,7 +195,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -278,11 +263,13 @@
       <workItem from="1566462304571" duration="50348000" />
       <workItem from="1567061296277" duration="42320000" />
       <workItem from="1567223767420" duration="35666000" />
+      <workItem from="1567748374718" duration="20000" />
+      <workItem from="1568097420398" duration="1204000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="208024000" />
+    <option name="totallyTimeSpent" value="209248000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -353,13 +340,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/system/main_js/qxyl-1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2917">
-          <caret line="392" selection-start-line="392" selection-end-line="392" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/import/STLLoader.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3747">
@@ -374,45 +354,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/system/lab/vertices/qxyl-1.html" />
+    <entry file="file://$PROJECT_DIR$/system/lab/vertices/qxyl-2.html" />
+    <entry file="file://$PROJECT_DIR$/system/main_js/test.js" />
+    <entry file="file://$PROJECT_DIR$/system/lab/vertices/test1.html" />
     <entry file="file://$PROJECT_DIR$/import/three.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
+        <state relative-caret-position="145710">
           <caret line="9714" column="42" selection-start-line="9714" selection-start-column="29" selection-end-line="9714" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/system/lab/vertices/qxyl-1.html">
+    <entry file="file://$PROJECT_DIR$/system/main_js/qxyl-1.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="52" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/system/lab/vertices/test1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/system/lab/vertices/qxyl-2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-87">
-          <caret line="32" column="6" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
+        <state relative-caret-position="6090">
+          <caret line="406" selection-start-line="406" selection-end-line="406" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/system/main_js/qxyl-2.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="447">
-          <caret line="200" selection-start-line="200" selection-end-line="200" />
+          <caret line="212" selection-start-line="212" selection-end-line="212" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/system/main_js/test.js">
+    <entry file="file://$PROJECT_DIR$/system/lab/test/test3.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="198" column="38" selection-start-line="198" selection-start-column="38" selection-end-line="198" selection-end-column="38" />
+        <state relative-caret-position="463">
+          <caret line="128" column="42" selection-start-line="128" selection-start-column="42" selection-end-line="128" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/import2/three.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1862">
+          <caret line="14716" column="46" selection-start-line="14716" selection-start-column="46" selection-end-line="14716" selection-end-column="46" />
         </state>
       </provider>
     </entry>

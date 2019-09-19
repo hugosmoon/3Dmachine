@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="icon" href="../../logo.ico">
+    <title>测试</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../../import/css/index.css">
+    <link rel="stylesheet" href="../../main_css/main.css">
+    <!-- 引入组件库 -->
+    <script src="../../../import/vue.js"></script>
+    <script src="../../../import/element_index.js"></script>
+    <script src="../../../import/three.js"></script>
+    <script src="../../../import/stats.js"></script>
+    <script src="../../../import/Setting.js"></script>
+    <script src="../../../import/OrbitControls.js"></script>
+    <script src="../../../import/dat.gui.min.js"></script>
+    <script src="../../../import/SceneUtils.js"></script>
+    <script src="../../../import/jquery-3.4.1.min.js"></script>
+    <script src="../../../import/dat.gui.js"></script>
+    <script src="../../../import2/Detector.js"></script>
+    <!-- <script src="../../../import2/OrbitControls.js"></script> -->
+
+</head>
+<body  onload="threeStart()">
+    <div>
+    <!--加载动画的div-->
+    <div id="render" >
+
+            <div id="Stats-output">
+                </div>
+
+                <div id="WebGL-output">
+                    </div>
+
+
+<script>
+
+let stats = initStats();
+    let scene, camera, renderer, controls, guiControls;
+
+    // 场景
+    function initScene() {
+
+        scene = new THREE.Scene();
+
+    }
+
+    // 相机
+    function initCamera() {
+
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 5000);
+        camera.position.set(120, 100, 100);
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+    }
+
+    // 渲染器
+    function initRenderer() {
+
+        renderer = new THREE.WebGLRenderer({antialias: true});
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x050505);
+        document.body.appendChild(renderer.domElement);
+
+    }
+
+    // 灯光
+    function initLight() {
+
+        let spotLight = new THREE.SpotLight(0xffffff);
+        spotLight.position.set(-10, 200, 30);
+        scene.add(spotLight);
+
+    }
+
+    // 控制器
+    function initControls() {
+
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        // 添加惯性
+        controls.enableDamping = true;
+        // 旋转速度
+        controls.rotateSpeed = 0.05;
+        // 最大可视距离
+        controls.maxDistance = 500;
+        // 最小可视距离
+        controls.minDistance = 100;
+
+    }
+
+    // 调试插件
+    function initGui() {
+
+        guiControls = new function () {
+
+
+        };
+
+        let gui = new dat.GUI();
+
+
+    }
+
+    // 创建一个Group对象
+    let group = new THREE.Group();
+    // 场景中的内容
+    function initContent() {
+
+        // 创建材质数组
+        let matArray = [];
+        matArray.push(new THREE.MeshBasicMaterial({color: 0x9ACD32}));
+        matArray.push(new THREE.MeshBasicMaterial({color: 0x9B30FF}));
+        matArray.push(new THREE.MeshBasicMaterial({color: 0x9ACD32}));
+        matArray.push(new THREE.MeshBasicMaterial({color: 0x63B8FF}));
+        matArray.push(new THREE.MeshBasicMaterial({color: 0xc41e3a}));
+        matArray.push(new THREE.MeshBasicMaterial({color: 0xffffff}));
+        
+
+        // 循环创建立方体
+        // for (let x = 0; x < 3; x++){
+
+        //     for (let y = 0; y < 3; y++){
+
+        //         for (let z = 0; z < 3; z++){
+
+                    let boxGeometry = new THREE.CylinderGeometry( 5, 5, 20, 32 );
+                    let box = new THREE.Mesh(boxGeometry, matArray);
+                    box.position.set(0,0,0);
+                    group.add(box);
+
+        //         }
+        //     }
+        // }
+
+        scene.add(group);
+
+    }
+
+    // 性能插件
+    function initStats() {
+
+        let stats = new Stats();
+
+        stats.domElement.style.position = 'absolute';
+        stats.domElement.style.left = '0px';
+        stats.domElement.style.top = '0px';
+
+        document.body.appendChild(stats.domElement);
+
+        return stats;
+    }
+    // 更新
+    function update() {
+
+        stats.update();
+        controls.update();
+
+        group.rotation.y += 0.01;
+    }
+
+    // 初始化
+    function init() {
+
+        // 兼容性判断，若不兼容会提示信息
+        if (!Detector.webgl) Detector.addGetWebGLMessage();
+
+        initScene();
+        initCamera();
+        initRenderer();
+        initLight();
+        initControls();
+        initContent();
+        initGui();
+
+        window.addEventListener('resize', onWindowResize, false);
+    }
+
+    // 窗口变动触发的方法
+    function onWindowResize() {
+
+        // 重新设置相机的宽高比
+        camera.aspect = window.innerWidth / window.innerHeight;
+
+        // 更新相机投影矩阵
+        camera.updateProjectionMatrix();
+
+        // 更新渲染器大小
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+    }
+
+    // 循环渲染
+    function animate() {
+
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+        update();
+    }
+
+    // 页面绘制完后加载
+    window.onload = function () {
+
+        init();
+        animate();
+
+    };
+</script>
+</body>
+</html>

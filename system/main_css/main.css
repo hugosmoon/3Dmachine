@@ -59,7 +59,21 @@ body {
     margin-top: 30px;
     margin-right: 30px;
     padding-bottom: 30px;
-    width: 400px;
+    width: 500px;
 
 
+}
+
+#qxyl2-charts{
+    opacity: 0.8;
+    border-radius:5px;
+    background:rgba(0,0,0,0.7);
+    float:right;
+    margin-top: 30px;
+    margin-right: 30px;
+    padding-bottom: 30px;
+    width: 500px;
+}
+#container{
+    margin-bottom: 30px;
 }

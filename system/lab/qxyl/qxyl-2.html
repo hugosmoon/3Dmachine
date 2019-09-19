@@ -21,6 +21,8 @@
     <script src="../../../import/STLLoader.js"></script>
     <script src="../../../import/dat.gui.js"></script>
     <script src="../../../import/stats.js"></script>
+    <script src="../../../import/echarts.min.js"></script>
+    <script src="../../../import/echarts-gl.min.js"></script>
     
 </head>
 <body onload="threeStart()">
@@ -72,23 +74,19 @@
 
         </div>
         </div>
-            <div id="force_control">
+            <div id="qxyl2-charts">
                 <div id="control-inner">
                 <div class="demo-image__placeholder">
-                    <div class="block">
-                        <span class="demonstration" style="color:#C0C4CC">主切削力</span>
-                        <!--<el-image :src="src1"></el-image>-->
-                        <canvas style="margin-top:20px;height: 200px;width: 340px;background: rgba(255, 255, 255, 0);"></canvas>
-                    </div>
-                    <div class="block">
-                        <span class="demonstration" style="color:#C0C4CC">径向切削力</span>
-                        <canvas style="margin-top:20px;height: 200px;width: 340px;background: rgba(255, 255, 255, 0);"></canvas>
-                    </div>
+                    
+                        <div id="container" style="height:300px;width: 100%;"></div>
+                        <div id="container2" style="height:300px;width: 100%;"></div>
+                
                 </div>
             </div>
         </div>
         </div>
 </div>
+<script src="../../main_js/chart_line.js"></script>
 <script src="../../main_js/create_cylinder.js"></script>
 <script src="../../main_js/tool.js"></script>
 <script src="../../main_js/qxyl-2.js"></script>

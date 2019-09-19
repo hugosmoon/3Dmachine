@@ -50,6 +50,7 @@ secondary_edge_back_angl=parseFloat(GetQueryString('secondary_edge_back_angl'));
 daojujiaodubuchang=parseFloat(GetQueryString('daojujiaodubuchang'));
 
 let stats = initStats();
+let chart_line1,chart_line2;
 //
 // let controls = new function () {
 //
@@ -403,6 +404,9 @@ function initObject() {
 
 }
 
+
+
+
 //动画
 function render() {
 
@@ -475,6 +479,8 @@ function render() {
                     e.geometry.verticesNeedUpdate = true;//通知顶点更新
                     e.geometry.elementsNeedUpdate = true;//特别重要，通知线条连接方式更新
                     e.geometry.computeFaceNormals();
+                    console.log('123');
+                    console.log(e.matrixWorldNeedsUpdate);
                 });
                 }
                 // console.log('a:'+Date.now());
@@ -504,6 +510,7 @@ function render() {
                     e.geometry.verticesNeedUpdate = true;//通知顶点更新
                     e.geometry.elementsNeedUpdate = true;//特别重要，通知线条连接方式更新
                     e.geometry.computeFaceNormals();
+                    
                 });
             }
            
@@ -529,21 +536,47 @@ function render() {
             load_status=true;
         }
         count+=1;
+
+        if(count%10==0){
+            if(cut_length>0){
+                draw_chart(chart_line1,Math.round(cut_length*10)/10,Math.round(Math.random()*200));
+            }
+            
+            
+        }
+
+        
     }
     catch (e) {
+        console.log(e)
     }
 
     requestAnimationFrame(render);
     renderer.render(scene, camera);
 }
 
+//绘制图像
+function draw_chart(chart,x,y){
+    if(chart.data.length>100){
+        chart.delete_data();
+    }
+    chart.push_data(x,y); 
+    chart.update();
+}
+
 
 //主函数
 function threeStart() {
+    //图表
+    chart_line1=new chart_line('container','dark','','切削长度','主切削力','mm','N');
+    chart_line1.update();
+    //三维场景
     initThree();
     initObject();
     loadAutoScreen(camera, renderer);
     render();
+    
+
 }
 
 var Main = {
@@ -693,5 +726,9 @@ function initStats() {
 
     return stats;
 }
+
+
+
+
 
 
