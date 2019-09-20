@@ -1,5 +1,5 @@
-// 参数-div_ID,图表类型,大标题，x轴标题，y轴标题，x轴单位，y轴单位,是否显示x轴数字,是否显示y轴数字，是否显示x轴刻度，是否显示y轴刻度,是否显示x轴标题,是否显示y轴标题
-function chart_line(container_id,chart_type,title_chart,title_x,title_y,unit_x,unit_y,axisLabel_x=true,axisLabel_y=true,axisLabel_number_x_show=true,axisLabel_number_y_show=true,title_x_show=true,title_y_show=true){
+// 参数-div_ID,图表类型,线宽，大标题，x轴标题，y轴标题，x轴单位，y轴单位,是否显示x轴数字,是否显示y轴数字，是否显示x轴刻度，是否显示y轴刻度,是否显示x轴标题,是否显示y轴标题
+function chart_line(container_id,chart_type,line_weight=1,line_color='#6cb041',title_chart,title_x,title_y,unit_x,unit_y,axisLabel_x=true,axisLabel_y=true,axisLabel_number_x_show=true,axisLabel_number_y_show=true,title_x_show=true,title_y_show=true){
     this.data=[];
     this.dom = document.getElementById(container_id);
     this.myChart = echarts.init(this.dom,chart_type);
@@ -13,6 +13,13 @@ function chart_line(container_id,chart_type,title_chart,title_x,title_y,unit_x,u
             text: title_chart,
             // left:'0%',
          //    top:20
+        },
+        toolbox: {
+            show: false,
+            itemSiz:30,
+            feature: {
+                saveAsImage: {}
+            }
         },
         tooltip: {
             trigger: 'axis',
@@ -35,6 +42,9 @@ function chart_line(container_id,chart_type,title_chart,title_x,title_y,unit_x,u
             },
             splitLine: {
                 show: true,
+                lineStyle:{
+                    width:0.3//设置线条粗细
+                }
             },
             axisLabel:{
                 show: axisLabel_x,
@@ -49,7 +59,10 @@ function chart_line(container_id,chart_type,title_chart,title_x,title_y,unit_x,u
                 fontWeight:'bold'
             },
             splitLine: {
-                show: true
+                show: true,
+                lineStyle:{
+                    width:0.3//设置线条粗细
+                }
             },
             axisLabel:{
                 show: axisLabel_y,
@@ -60,7 +73,15 @@ function chart_line(container_id,chart_type,title_chart,title_x,title_y,unit_x,u
             type: 'line',
             showSymbol: false,
             hoverAnimation: false,
-            data: this.data
+            data: this.data,
+            itemStyle: {
+                normal: {
+                    color: line_color,
+                    lineStyle:{
+                        width:line_weight//设置线条粗细
+                    }
+                }
+            }
         }]
     }
 

@@ -571,9 +571,9 @@ function draw_chart(chart,number,x,y){
 //主函数
 function threeStart() {
     //图表
-    chart_line1=new chart_line('container','dark','','切削长度','主切削力','mm','N',true,true,true,true,true,false);
+    chart_line1=new chart_line('container','dark',0.5,'#6cb041','','切削长度','主切削力','mm','N',true,true,true,true,false,true);
     chart_line1.update();
-    chart_line2=new chart_line('container2','dark','','切削长度','径向削力','mm','N',true,true,true,true,false,true);
+    chart_line2=new chart_line('container2','dark',1,'#9999ff','','切削长度','径向削力','mm','N',true,true,true,true,true,false);
     chart_line2.update();
     //三维场景
     initThree();
