@@ -479,8 +479,8 @@ function render() {
                     e.geometry.verticesNeedUpdate = true;//通知顶点更新
                     e.geometry.elementsNeedUpdate = true;//特别重要，通知线条连接方式更新
                     e.geometry.computeFaceNormals();
-                    console.log('123');
-                    console.log(e.matrixWorldNeedsUpdate);
+                    // console.log('123');
+                    // console.log(e.matrixWorldNeedsUpdate);
                 });
                 }
                 // console.log('a:'+Date.now());
@@ -539,7 +539,10 @@ function render() {
 
         if(count%10==0){
             if(cut_length>0&&machine_speed>0){
-                draw_chart(chart_line1,Math.round(cut_length*10)/10,Math.round(Math.random()*200));
+                let x=Math.round(cut_length*10)/10
+                let y=Math.round(Math.random()*700);
+                draw_chart(chart_line1,1000,x,y);
+                draw_chart(chart_line2,30,x,y);
             }
             
             
@@ -556,8 +559,8 @@ function render() {
 }
 
 //绘制图像
-function draw_chart(chart,x,y){
-    if(chart.data.length>100){
+function draw_chart(chart,number,x,y){
+    if(chart.data.length>number){
         chart.delete_data();
     }
     chart.push_data(x,y); 
@@ -568,8 +571,10 @@ function draw_chart(chart,x,y){
 //主函数
 function threeStart() {
     //图表
-    chart_line1=new chart_line('container','dark','','切削长度','主切削力','mm','N');
+    chart_line1=new chart_line('container','dark','','切削长度','主切削力','mm','N',true,true,true,true,true,false);
     chart_line1.update();
+    chart_line2=new chart_line('container2','dark','','切削长度','径向削力','mm','N',true,true,true,true,false,true);
+    chart_line2.update();
     //三维场景
     initThree();
     initObject();

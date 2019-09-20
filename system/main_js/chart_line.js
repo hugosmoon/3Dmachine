@@ -1,4 +1,5 @@
-function chart_line(container_id,chart_type,title_chart,title_x,title_y,unit_x,unit_y){
+// 参数-div_ID,图表类型,大标题，x轴标题，y轴标题，x轴单位，y轴单位,是否显示x轴数字,是否显示y轴数字，是否显示x轴刻度，是否显示y轴刻度,是否显示x轴标题,是否显示y轴标题
+function chart_line(container_id,chart_type,title_chart,title_x,title_y,unit_x,unit_y,axisLabel_x=true,axisLabel_y=true,axisLabel_number_x_show=true,axisLabel_number_y_show=true,title_x_show=true,title_y_show=true){
     this.data=[];
     this.dom = document.getElementById(container_id);
     this.myChart = echarts.init(this.dom,chart_type);
@@ -26,7 +27,7 @@ function chart_line(container_id,chart_type,title_chart,title_x,title_y,unit_x,u
         },
         xAxis: {
             type: 'value',
-            name: title_x+'/'+unit_x,
+            name: title_x_show?title_x+'/'+unit_x:'',
             nameLocation:'middle',  
             nameGap:25,
             nameTextStyle:{
@@ -34,11 +35,14 @@ function chart_line(container_id,chart_type,title_chart,title_x,title_y,unit_x,u
             },
             splitLine: {
                 show: true,
+            },
+            axisLabel:{
+                show: axisLabel_x,
             }
         },
         yAxis: {
             type: 'value',
-            name: title_y+'/'+unit_y,
+            name: title_y_show?title_y+'/'+unit_y:'',
             nameLocation:'end',
          //    nameGap:35,
             nameTextStyle:{
@@ -46,6 +50,9 @@ function chart_line(container_id,chart_type,title_chart,title_x,title_y,unit_x,u
             },
             splitLine: {
                 show: true
+            },
+            axisLabel:{
+                show: axisLabel_y,
             }
         },
         series: [{
