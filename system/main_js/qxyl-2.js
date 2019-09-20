@@ -535,18 +535,24 @@ function render() {
         if(model_number==9){
             load_status=true;
         }
-        count+=1;
+        
 
-        if(count%10==0){
+        
             if(cut_length>0&&machine_speed>0){
                 let x=Math.round(cut_length*10)/10
-                let y=Math.round(Math.random()*700);
-                draw_chart(chart_line1,1000,x,y);
-                draw_chart(chart_line2,30,x,y);
-            }
-            
-            
-        }
+                let y=x+Math.round(Math.random()*100);
+                if(count%10==0){
+                    if(count%50==0){
+                        draw_chart(chart_line1,2000,x,y);
+                    }
+                    draw_chart(chart_line2,30,x,y);
+                }
+                count+=1;
+            }  
+        
+
+
+        
 
         
     }
@@ -571,9 +577,9 @@ function draw_chart(chart,number,x,y){
 //主函数
 function threeStart() {
     //图表
-    chart_line1=new chart_line('container','dark',0.5,'#6cb041','','切削长度','主切削力','mm','N',true,true,true,true,false,true);
+    chart_line1=new chart_line('container','dark',0.5,'#6cb041','切削长度-主切削力曲线','切削长度','主切削力','mm','N',true,true,true,true,false,true);
     chart_line1.update();
-    chart_line2=new chart_line('container2','dark',1,'#9999ff','','切削长度','径向削力','mm','N',true,true,true,true,true,false);
+    chart_line2=new chart_line('container2','dark',1,'#9999ff','','切削长度','主切削力','mm','N',true,true,true,true,true,false);
     chart_line2.update();
     //三维场景
     initThree();
