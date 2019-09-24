@@ -539,7 +539,7 @@ function render() {
 
         
             if(cut_length>0&&machine_speed>0){
-                let x=Math.round(cut_length*10)/10
+                let x=(count!=0)?Math.round(cut_length*10)/10:0;
                 let y=x+Math.round(Math.random()*100);
                 if(count%10==0){
                     if(count%50==0){
